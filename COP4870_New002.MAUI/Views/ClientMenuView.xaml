@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="COP4870_New002.MAUI.Views.ClientMenuView"
+             Title="Client Menu">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Clients"
+            Clicked="Toolbar_ClientsClicked"
+            />
+        <ToolbarItem
+            Text="Projects"
+            Clicked="Toolbar_ProjectsClicked"
+           />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Stroke="#d2d2d2" StrokeThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry Grid.Column="0" Text="{Binding Path=Query}" Placeholder="Enter Name" BackgroundColor="#171717" TextColor="#d2d2d2"/>
+                        <Button Grid.Column="1" Text="Search"
+                                Clicked="Search_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="#d2d2d2"
+                                HorizontalOptions="EndAndExpand"/>
+                    </Grid>
+                    <Button Text="Add"
+                            Grid.Row="1"
+                            BackgroundColor="#171717"
+                            BorderColor="#d2d2d2"
+                            Clicked="Add_Clicked"
+                            BorderWidth="1"
+                            TextColor="#d2d2d2"
+                            HorizontalOptions="Fill"/>
+                </Grid>
+            </Border>
+                
+            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1">   
+                <ListView ItemsSource="{Binding Path=Clients}"
+                            SelectedItem="{Binding Path=SelectedClient, Mode=TwoWay}"/>
+            </Border>
+        </Grid>
+
+        <!--Display-->             
+        <Grid Grid.Column="1" IsVisible="{Binding Path=DisplayContent}" IsEnabled="{Binding Path=DisplayContent}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0"
+                        WidthRequest="200" HeightRequest="150"
+                        HorizontalOptions="Start" VerticalOptions="Start"
+                        Margin="100,100,10,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Text="{Binding Path=SelectedClient.Name}" FontSize="Title" FontAttributes="Bold" />
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    
+                        <Label Grid.Row="0" Grid.Column="0" Text="Status:" FontSize="Header"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedClient.Status}" FontSize="Header" TextColor="LawnGreen"/>
+                        <Button Text="Edit"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Clicked="Edit_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="#d2d2d2"
+                                Margin="1"/>
+                        <Button Text="Delete"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Clicked="Delete_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="Red"
+                                Margin="1"/>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="1"
+                        HeightRequest="150" WidthRequest="600"
+                        HorizontalOptions="Start" VerticalOptions="Start"
+                        Margin="100,100,10,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Open Date:" FontSize="Header"/>
+                    <Label Grid.Row="1" Grid.Column="0" Text="Close Date:" FontSize="Header"/>
+                    <Label Grid.Row="2" Grid.Column="0" Text="Notes:" FontSize="Header"/>
+
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedClient.OpenDate}" FontSize="Header"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Path=SelectedClient.CloseDate}" FontSize="Header"/>
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedClient.Notes}" FontSize="Header"/>
+                </Grid>
+            </Grid>
+
+            <Grid VerticalOptions="End" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Number of Projects: " FontSize="Medium" HorizontalOptions="Start"/>
+                <Label Grid.Column="1" Text="{Binding Path=Projects.Count}" FontSize="Medium"/>
+            </Grid>
+
+            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1">
+                <Grid>
+                    <CollectionView ItemsSource="{Binding Path=Projects}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Span="1" Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <!--<Label Text="{Binding Name}"/>-->
+                                <Border HorizontalOptions="CenterAndExpand" VerticalOptions="Fill"
+                                        WidthRequest="300" Stroke="#d2d2d2" StrokeThickness="1">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1*"/>
+                                            <RowDefinition Height="6*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Grid.Row="0" Text="{Binding Name}" FontSize="Large" Margin="15,10,0,0" VerticalOptions="Start"/>
+                                        <Label Grid.Row="1" Text="{Binding Status}" FontSize="Caption" Margin="15,10,0,0" VerticalOptions="Start"/>
+                                    </Grid>
+                                </Border>                            
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!--Edit-->
+        <Grid Grid.Column="1" IsVisible="{Binding Path=DisplayEdit}" IsEnabled="{Binding Path=DisplayEdit}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" HeightRequest="300" WidthRequest="800" VerticalOptions="End" Margin="0,0,0,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Text="Name:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="1" Text="Status:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="2" Text="Open Date:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="3" Text="Close Date:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="4" Text="Notes:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+
+                    <Entry Grid.Column="1" Grid.Row="0" Text="{Binding Path=TempClient.Name}"/>
+                    <Entry Grid.Column="1" Grid.Row="1" Text="{Binding Path=TempClient.Status}"/>
+                    <Border Grid.Column="1" Grid.Row="2">
+                        <DatePicker VerticalOptions="End" Date="{Binding Path=TempClient.OpenDate}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="3">
+                        <DatePicker VerticalOptions="End" Date="{Binding Path=TempClient.CloseDate}"/>
+                    </Border>
+                    <Entry Grid.Column="1" Grid.Row="4" Text="{Binding Path=TempClient.Notes}"/>
+                        
+                </Grid>
+                <Grid Grid.Row="1" HeightRequest="60" WidthRequest="800" VerticalOptions="Start">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Text="Save"
+                            Grid.Column="0"
+                            Clicked="Save_Clicked"
+                            BackgroundColor="#171717"
+                            BorderColor="#d2d2d2"
+                            BorderWidth="1"
+                            TextColor="#d2d2d2"
+                            Margin="1"/>
+                    <Button Text="Cancel"
+                            Grid.Column="1"
+                            Clicked="Cancel_Clicked"
+                            BackgroundColor="#171717"
+                            BorderColor="#d2d2d2"
+                            BorderWidth="1"
+                            TextColor="#d2d2d2"
+                            Margin="1"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,15 @@
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/bin/Debug/net7.0/COP4870_New002
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/bin/Debug/net7.0/COP4870_New002.deps.json
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/bin/Debug/net7.0/COP4870_New002.runtimeconfig.json
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/bin/Debug/net7.0/COP4870_New002.dll
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/bin/Debug/net7.0/COP4870_New002.pdb
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/COP4870_New002.csproj.AssemblyReference.cache
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/COP4870_New002.GeneratedMSBuildEditorConfig.editorconfig
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/COP4870_New002.AssemblyInfoInputs.cache
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/COP4870_New002.AssemblyInfo.cs
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/COP4870_New002.csproj.CoreCompileInputs.cache
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/COP4870_New002.dll
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/refint/COP4870_New002.dll
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/COP4870_New002.pdb
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/COP4870_New002.genruntimeconfig.cache
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002/obj/Debug/net7.0/ref/COP4870_New002.dll
