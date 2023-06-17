@@ -83,6 +83,19 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
+        public ObservableCollection<Time> Times
+        {
+            get
+            {   //get all times whos projectId = selectedproject.id
+                if (selectedproject != null)
+                {
+                    return new ObservableCollection<Time>(TimeService.Current.Times.Where(s => s.ProjectId == selectedproject.Id));
+                }
+
+                return new ObservableCollection<Time>();
+            }
+        }
+
         public void Search()
         {
             NotifyPropertyChanged("Projects");
@@ -126,6 +139,10 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void Delete()
         {
+            foreach (Time tm in Times)
+            {
+                TimeService.Current.Times.Remove(tm);
+            }
             ProjectService.Current.Delete(SelectedProject);
             SelectedProject = null;
             NotifyPropertyChanged("Clients");
