@@ -14,7 +14,10 @@ namespace COP4870_New002.MAUI.ViewModels
 {
     internal class MainViewModel
     {
+        public MainViewModel()
+        {
 
+        }
     }
 }
 

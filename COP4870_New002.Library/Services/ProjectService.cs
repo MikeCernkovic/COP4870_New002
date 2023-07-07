@@ -34,15 +34,14 @@ namespace COP4870_New002.Library.Services
         {
             projects = new List<Project>
             {
-                new Project{ Id = 1, Name = "Proj 1", IsActive = true, ClientId = 1},
-                new Project{ Id = 2, Name = "Proj 2", IsActive = true, ClientId = 1},
-                new Project{ Id = 3, Name = "Proj 3", IsActive = true, ClientId = 1},
-                new Project{ Id = 4, Name = "Proj 4", IsActive = true, ClientId = 1},
-                new Project{ Id = 5, Name = "Proj 5", IsActive = true, ClientId = 2},
-                new Project{ Id = 6, Name = "Proj 6", IsActive = true, ClientId = 2},
-                new Project{ Id = 7, Name = "Proj 7", IsActive = true, ClientId = 2},
-                new Project{ Id = 8, Name = "Proj 8", IsActive = true, ClientId = 2},
-                new Project{ Id = 9, Name = "Proj 9", IsActive = true, ClientId = 3},
+                new Project{ Id = 1, Name = "Clean Room",       IsActive = true, ClientId = 1, OpenDate = new DateTime(2019,05,30,0,0,0), Notes = "Random Note"},
+                new Project{ Id = 2, Name = "Work on Homework", IsActive = true, ClientId = 2, CloseDate = new DateTime(2012,06,20,0,0,0), Notes = "Two assignments due"},
+                new Project{ Id = 3, Name = "Build Spaceship",  IsActive = true, ClientId = 3, CloseDate = new DateTime(2013,07,09,0,0,0), Notes = "Watch the terminator"},
+                new Project{ Id = 4, Name = "Fix the black pearl", IsActive = true, ClientId = 1, OpenDate = new DateTime(2016,08,09,0,0,0), Notes = "This is another note"},
+                new Project{ Id = 5, Name = "Feed the dog",     IsActive = true, ClientId = 3, OpenDate = new DateTime(2010,09,09,0,0,0), Notes = "One more note"},
+                new Project{ Id = 6, Name = "Random Project",   IsActive = true, ClientId = 4, CloseDate = new DateTime(2029,02,10,0,0,0), Notes = "I am tired of writing notes"},
+                new Project{ Id = 7, Name = "Workout",          IsActive = true, ClientId = 4, OpenDate = new DateTime(2040,01,04,0,0,0), Notes = "The new spiderman movie is out"},
+                new Project{ Id = 8, Name = "COP4870 Proj",     IsActive = true, ClientId = 2, OpenDate = new DateTime(2013,01,03,0,0,0), Notes = "Fool me twice shame"}
             };
         }
 
@@ -51,7 +50,7 @@ namespace COP4870_New002.Library.Services
             get { return projects; }
         }
 
-        public List<Project> SearchClients(string query)
+        public List<Project> SearchProjects(string query)
         {
             return Projects.Where(s => s.Name.ToUpper()
                             .Contains(query.ToUpper()))

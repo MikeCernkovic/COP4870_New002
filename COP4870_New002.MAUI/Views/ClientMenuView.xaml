@@ -12,6 +12,10 @@
             Text="Projects"
             Clicked="Toolbar_ProjectsClicked"
            />
+        <ToolbarItem
+            Text="Employees"
+            Clicked="Toolbar_EmployeesClicked"
+           />
     </ContentPage.ToolbarItems>
 
     <Grid>

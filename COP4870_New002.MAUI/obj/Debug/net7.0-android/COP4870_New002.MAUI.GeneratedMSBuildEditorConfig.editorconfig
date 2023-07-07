@@ -50,6 +50,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = COP4870_New002.MAUI.Views.
 build_metadata.AdditionalFiles.TargetPath = Views/ClientMenuView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/ClientMenuView.xaml
 
+[/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/Views/EmployeeMenuView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = COP4870_New002.MAUI.Views.EmployeeMenuView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/EmployeeMenuView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/EmployeeMenuView.xaml
+
 [/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/Views/ProjectMenuView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = COP4870_New002.MAUI.Views.ProjectMenuView.xaml

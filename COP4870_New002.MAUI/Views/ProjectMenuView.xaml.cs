@@ -10,31 +10,51 @@ public partial class ProjectMenuView : ContentPage
         BindingContext = new ProjectMenuViewModel();
     }
 
-    void Search_Clicked(System.Object sender, System.EventArgs e)
+    void EditProject_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ProjectMenuViewModel).Search();
+        (BindingContext as ProjectMenuViewModel).EditProject();
     }
 
-    void Edit_Clicked(System.Object sender, System.EventArgs e)
+    void EditTime_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ProjectMenuViewModel).Edit();
+        (BindingContext as ProjectMenuViewModel).EditTime();
     }
 
-    void Delete_Clicked(System.Object sender, System.EventArgs e)
+
+    void DeleteProject_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ProjectMenuViewModel).Delete();
+        (BindingContext as ProjectMenuViewModel).DeleteProject();
     }
 
-    void Add_Clicked(System.Object sender, System.EventArgs e)
+    void DeleteTime_Clicked(System.Object sender, System.EventArgs e)
     {
-
-        (BindingContext as ProjectMenuViewModel).Add();
+        (BindingContext as ProjectMenuViewModel).DeleteTime();
     }
 
-    void Save_Clicked(System.Object sender, System.EventArgs e)
+
+    void AddProject_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ProjectMenuViewModel).Save();
+
+        (BindingContext as ProjectMenuViewModel).AddProject();
     }
+
+    void AddTime_Clicked(System.Object sender, System.EventArgs e)
+    {
+
+        (BindingContext as ProjectMenuViewModel).AddTime();
+    }
+
+
+    void SaveProject_Clicked(System.Object sender, System.EventArgs e)
+    {
+        (BindingContext as ProjectMenuViewModel).SaveProject();
+    }
+
+    void SaveTime_Clicked(System.Object sender, System.EventArgs e)
+    {
+        (BindingContext as ProjectMenuViewModel).SaveTime();
+    }
+
 
     void Cancel_Clicked(System.Object sender, System.EventArgs e)
     {
@@ -49,5 +69,10 @@ public partial class ProjectMenuView : ContentPage
     void Toolbar_ProjectsClicked(System.Object sender, System.EventArgs e)
     {
         Shell.Current.GoToAsync("//Project");
+    }
+
+    void Toolbar_EmployeesClicked(System.Object sender, System.EventArgs e)
+    {
+        Shell.Current.GoToAsync("//Employee");
     }
 }

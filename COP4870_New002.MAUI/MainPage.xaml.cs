@@ -20,6 +20,11 @@ namespace COP4870_New002.MAUI
         {
             Shell.Current.GoToAsync("//Project");
         }
+
+        void EmployeesClicked(System.Object sender, System.EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Employee");
+        }
     }
 }
 

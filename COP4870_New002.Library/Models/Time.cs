@@ -1,8 +1,9 @@
 ﻿using System;
 namespace COP4870_New002.Library.Models
 {
-	public class Time
+	public class Time : ICloneable
 	{
+		public int Id { get; set; }
 		public DateTime Date { get; set; }
 		public string Narrative { get; set; }
 		public int Hours { get; set; }
@@ -12,6 +13,11 @@ namespace COP4870_New002.Library.Models
 		public Time()
 		{
 		}
-	}
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+    }
 }
 

@@ -33,14 +33,48 @@ namespace COP4870_New002.Library.Services
                 new Employee{Id = 2, Name = "Mike", Rate = 0.40},
                 new Employee{Id = 3, Name = "Alex", Rate = 0.70},
                 new Employee{Id = 4, Name = "Katie", Rate = 0.30},
-                new Employee{Id = 5, Name = "Christina", Rate = 0.70},
-                new Employee{Id = 6, Name = "Noah", Rate = 0.80}
+                new Employee{Id = 5, Name = "Christina", Rate = 0.80}
             };
         }
 
         public List<Employee> Employees
         {
             get { return employees; }
+        }
+
+        public List<Employee> SearchEmployees(string query)
+        {
+            return Employees.Where(s => s.Name.ToUpper()
+                            .Contains(query.ToUpper()))
+                            .ToList();
+        }
+
+        public Employee? Get(int id)
+        {
+            return Employees.FirstOrDefault(e => e.Id == id);
+        }
+
+        public void Add(Employee? employee)
+        {
+            if (employee != null)
+            {
+                employee.Id = employees.Last().Id + 1;
+                employees.Add(employee);
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var employeeToRemove = Get(id);
+            if (employeeToRemove != null)
+            {
+                employees.Remove(employeeToRemove);
+            }
+        }
+
+        public void Delete(Employee s)
+        {
+            Delete(s.Id);
         }
     }
 }

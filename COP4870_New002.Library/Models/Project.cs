@@ -27,7 +27,7 @@ namespace COP4870_New002.Library.Models
 
         public override string ToString()
         {
-            return $"{Id}\t\t{Name}";
+            return $"{Id}\t{Name}";
         }
 
         public object Clone()

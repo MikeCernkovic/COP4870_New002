@@ -12,6 +12,10 @@
             Text="Projects"
             Clicked="Toolbar_ProjectsClicked"
            />
+        <ToolbarItem
+            Text="Employees"
+            Clicked="Toolbar_EmployeesClicked"
+           />
     </ContentPage.ToolbarItems>
 
     <Grid>
@@ -20,159 +24,383 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Border Grid.Column="0" Stroke="#d2d2d2" StrokeThickness="1">
+            <Grid VerticalOptions="Fill">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Entry Grid.Column="0" Text="{Binding Path=Query}"
+                        Placeholder="Enter Name" BackgroundColor="#171717" TextColor="#d2d2d2"/>
+                <ListView Grid.Row="1" VerticalOptions="FillAndExpand"
+                            ItemsSource="{Binding Path=Projects}"
+                        SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}"/>
+                <Button Text="Add"
+                        Grid.Row="2"
+                        BackgroundColor="#171717"
+                        BorderColor="#d2d2d2"
+                        Clicked="AddProject_Clicked"
+                        BorderWidth="1"
+                        TextColor="#d2d2d2"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="End"/>
+            </Grid>
+        </Border>
+                
+
+        <!--Display-->
+        <Grid Grid.Column="1"
+              IsVisible="{Binding Path=DisplayProjectContent}" IsEnabled="{Binding Path=DisplayProjectContent}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="8*"/>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Stroke="#d2d2d2" StrokeThickness="1">
-                <Grid>
+            <Grid Grid.Row="0" Padding="25,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+     
+                <Grid Grid.Column="0" Margin="10,50,10,10"
+                      HorizontalOptions="Fill" VerticalOptions="Fill">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+
+                    <Label Grid.Row="0" Text="{Binding Path=SelectedProject.Name}"
+                            FontSize="Title" FontAttributes="Bold" Margin="10"/>
+
+                    <Grid Grid.Row="1" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Entry Grid.Column="0" Text="{Binding Path=Query}"
-                               Placeholder="Enter Name" BackgroundColor="#171717" TextColor="#d2d2d2"/>
-                        <Button Grid.Column="1" Text="Search"
-                                Clicked="Search_Clicked"
+                    
+                        <Label Grid.Row="0" Grid.Column="0" Text="Status:" FontSize="Header"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedProject.Status}"
+                                FontSize="Header" TextColor="LawnGreen" Margin="0,5,10,10"/>
+                        <Button Text="Edit"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Clicked="EditProject_Clicked"
                                 BackgroundColor="#171717"
                                 BorderColor="#d2d2d2"
                                 BorderWidth="1"
                                 TextColor="#d2d2d2"
-                                HorizontalOptions="EndAndExpand"/>
+                                Margin="2"/>
+                        <Button Text="Delete"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Clicked="DeleteProject_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="Red"
+                                Margin="2"/>
                     </Grid>
-                    <Button Text="Add"
-                            Grid.Row="1"
-                            BackgroundColor="#171717"
-                            BorderColor="#d2d2d2"
-                            Clicked="Add_Clicked"
-                            BorderWidth="1"
-                            TextColor="#d2d2d2"
-                            HorizontalOptions="Fill"/>
-                </Grid>
-            </Border>
-                
-            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1">   
-                <ListView ItemsSource="{Binding Path=Projects}"
-                            SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}"/>
-            </Border>
-        </Grid>
 
-        <!--Display-->             
-        <Grid Grid.Column="1" IsVisible="{Binding Path=DisplayContent}"
-              IsEnabled="{Binding Path=DisplayContent}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Margin="10,100,10,10"
-                  HorizontalOptions="Fill" VerticalOptions="Fill">
+                    <Grid Grid.Row="2" VerticalOptions="Fill" HorizontalOptions="Fill">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Text="Open Date:" FontSize="Header" Margin="10,5,10,10"/>
+                        <Label Grid.Row="1" Grid.Column="0" Text="Close Date:" FontSize="Header" Margin="10,5,10,10"/>
+                        <Label Grid.Row="2" Grid.Column="0" Text="Client:" FontSize="Header" Margin="10,5,10,10"/>
+                        <Label Grid.Row="3" Grid.Column="0" Text="Notes:" FontSize="Header" Margin="10,5,10,10"/>
+
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedProject.OpenDate}" FontSize="Header" Margin="0,5,10,10"/>
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Path=SelectedProject.CloseDate}" FontSize="Header" Margin="0,5,10,10"/>
+                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedClient.Name}" FontSize="Header" Margin="0,5,10,10"/>
+                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Path=SelectedProject.Notes}" FontSize="Header" Margin="0,5,10,10"/>
+                    </Grid>
+                </Grid>
+
+                <Border Grid.Column="1">
+                    <Grid VerticalOptions="Fill">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <CollectionView Grid.Row="1" VerticalOptions="Fill"
+                                        ItemsSource="{Binding Path=Times}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedTime, Mode=TwoWay}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="1" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border HorizontalOptions="CenterAndExpand" VerticalOptions="Fill">
+                                        <Grid Margin="0,5,0,0" Padding="5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Label Grid.Row="0" Text="{Binding Date}" FontSize="Medium" Margin="10,0,0,0" VerticalOptions="Start"/>
+                                
+                                            <Grid Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <!--<ColumnDefinition Width="1*"/>-->
+                                                </Grid.ColumnDefinitions>
+                                                <!--<Label Grid.Column="0" Text="Name" FontSize="Caption" Margin="10,10,0,0" VerticalOptions="Start"/>-->
+                                                <Label Grid.Column="0" Text="Hours:" FontSize="Caption" Margin="10,10,0,0" VerticalOptions="Start" HorizontalOptions="Start"/>
+                                                <Label Grid.Column="1" Text="{Binding Hours}" FontSize="Caption" Margin="3,10,0,0" VerticalOptions="Start" HorizontalOptions="Start"/>
+                                            </Grid>
+                                            <Label Grid.Row="2" Text="{Binding Narrative}" FontSize="Caption" Margin="10,10,0,0" VerticalOptions="Start"/>
+                                  
+                                        </Grid> 
+                                    </Border>                                                          
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>              
+                        <Button Text="Add"
+                                Grid.Row="0"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                Clicked="AddTime_Clicked"
+                                BorderWidth="1"
+                                TextColor="#d2d2d2"
+                                HorizontalOptions="Fill"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!--Display Time--> 
+            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1" 
+                    IsVisible="{Binding Path=DisplayTimeContent}" IsEnabled="{Binding Path=DisplayTimeContent}">                           
+                <Grid Padding="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding SelectedTime.Date}" FontSize="Large" Margin="15,10,0,0" VerticalOptions="Start"/>                   
+                            <Label Grid.Column="1" Text="  -  " FontSize="Large" Margin="15,10,0,0" VerticalOptions="Start"/> 
+                            <Label Grid.Column="2" Text="{Binding SelectedTime.Hours}" FontSize="Large" Margin="15,10,0,0" VerticalOptions="Start"/>
+                            <Label Grid.Column="3" Text="hrs" FontSize="Large" Margin="2,10,0,0" VerticalOptions="Start"/> 
+                        </Grid>
+                        <Label Grid.Row="1" Text="{Binding SelectedTime.Narrative}" FontSize="Medium" Margin="15,10,0,0" VerticalOptions="Start"/>            
+                    </Grid>
+
+                    <Grid Grid.Column="1" VerticalOptions="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Button Text="Edit"
+                                Grid.Row="0"
+                                Clicked="EditTime_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="#d2d2d2"
+                                Margin="2"/>
+                        <Button Text="Delete"
+                                Grid.Row="1"
+                                Clicked="DeleteTime_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="Red"
+                                Margin="2"/>
+                    </Grid>
+                </Grid> 
+            </Border>
+
+            <!--Edit Time--> 
+            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1"
+                    IsVisible="{Binding Path=DisplayTimeEdit}" IsEnabled="{Binding Path=DisplayTimeEdit}">                           
+                <Grid Padding="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3.5*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Margin="0,0,10,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" HorizontalOptions="Fill">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Text="Date:" VerticalOptions="Center" Margin="10"/>
+                            <DatePicker Grid.Column="1" Date="{Binding Path=SelectedTime.Date}" VerticalOptions="Center"/>
+                            <Label Grid.Column="2" Text="Hours:" VerticalOptions="Center" Margin="10"/>
+                            <Entry Grid.Column="3" Text="{Binding Path=SelectedTime.Hours}" Placeholder="0" VerticalOptions="Center"/>
+                            <Label Grid.Column="4" Text="Employee:" VerticalOptions="Center" Margin="10"/>
+
+                            <Grid Grid.Column="5">
+                                <CollectionView ItemsSource="{Binding Path=Employees}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Span="1" Orientation="Vertical"/>
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" Text="{Binding Name}"/>
+                                                <Label Grid.Column="1" Text="{Binding Rate}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                     </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Narrative:" VerticalOptions="Start" Margin="10"/>
+                            <Editor Grid.Column="1" Text="{Binding Path=SelectedTime.Narrative}" Placeholder="Enter Text" Margin="10"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="1" VerticalOptions="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Button Text="Save"
+                                Grid.Row="0"
+                                Clicked="SaveTime_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="#d2d2d2"
+                                Margin="2"/>
+                        <Button Text="Cancel"
+                                Grid.Row="1"
+                                Clicked="Cancel_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="#d2d2d2"
+                                Margin="2"/>
+                    </Grid>
+                </Grid> 
+            </Border>   
+        </Grid>
+        
+        <!--Edit-->
+        <Grid Grid.Column="1"
+              IsVisible="{Binding Path=DisplayProjectEdit}" IsEnabled="{Binding Path=DisplayProjectEdit}">
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Text="{Binding Path=SelectedProject.Name}"
-                        FontSize="Title" FontAttributes="Bold" Margin="10,5,10,10"/>
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="0" HeightRequest="300" WidthRequest="800" VerticalOptions="End" Margin="0,0,0,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Text="Name:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="1" Text="Status:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="2" Text="Client:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="3" Text="Open Date:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="4" Text="Close Date:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="5" Text="Notes:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+
+                    <Entry Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedProject.Name}"/>
+                    <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=SelectedProject.IsActive}" HorizontalOptions="Start"/>
+                    <Border Grid.Column="1" Grid.Row="2">
+                        <CollectionView ItemsSource="{Binding Path=Clients}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedClient, Mode=TwoWay}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="1" Orientation="Vertical"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label FontSize="Medium" Text="{Binding Name}" Margin="0,20,0,0"/>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="3">
+                        <DatePicker VerticalOptions="End" Date="{Binding Path=SelectedProject.OpenDate}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="4">
+                        <DatePicker VerticalOptions="End" Date="{Binding Path=SelectedProject.CloseDate}"/>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="5">
+                        <Editor Text="{Binding Path=SelectedProject.Notes}" Placeholder="Enter Text"/>
+                    </Border>
+                    
+                </Grid>
+                <Grid Grid.Row="1" HeightRequest="60" WidthRequest="800" VerticalOptions="Start">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    
-                    <Label Grid.Row="0" Grid.Column="0" Text="Status:" FontSize="Header" Margin="10,5,10,10"/>
-                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedProject.Status}"
-                            FontSize="Header" TextColor="LawnGreen" Margin="0,5,10,10"/>
-                    <Button Text="Edit"
-                            Grid.Row="1"
+                    <Button Text="Save"
                             Grid.Column="0"
-                            Clicked="Edit_Clicked"
+                            Clicked="SaveProject_Clicked"
                             BackgroundColor="#171717"
                             BorderColor="#d2d2d2"
                             BorderWidth="1"
                             TextColor="#d2d2d2"
-                            Margin="2"/>
-                    <Button Text="Delete"
-                            Grid.Row="1"
+                            Margin="1"/>
+                    <Button Text="Cancel"
                             Grid.Column="1"
-                            Clicked="Delete_Clicked"
+                            Clicked="Cancel_Clicked"
                             BackgroundColor="#171717"
                             BorderColor="#d2d2d2"
                             BorderWidth="1"
-                            TextColor="Red"
-                            Margin="2"/>
+                            TextColor="#d2d2d2"
+                            Margin="1"/>
                 </Grid>
             </Grid>
-
-            <Grid Grid.Column="1" Margin="10,100,10,10"
-                  VerticalOptions="Fill" HorizontalOptions="Fill">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Grid.Column="0" Text="Open Date:" FontSize="Header" Margin="10,5,10,10"/>
-                <Label Grid.Row="1" Grid.Column="0" Text="Close Date:" FontSize="Header" Margin="10,5,10,10"/>
-                <Label Grid.Row="2" Grid.Column="0" Text="Client:" FontSize="Header" Margin="10,5,10,10"/>
-                <Label Grid.Row="3" Grid.Column="0" Text="Notes:" FontSize="Header" Margin="10,5,10,10"/>
-
-                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedProject.OpenDate}" FontSize="Header" Margin="0,5,10,10"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Path=SelectedProject.CloseDate}" FontSize="Header" Margin="0,5,10,10"/>
-                <Label Grid.Row="2" Grid.Column="1" Text="Name" FontSize="Header" Margin="0,5,10,10"/>
-                <Label Grid.Row="3" Grid.Column="1" Text="{Binding Path=SelectedProject.Notes}" FontSize="Header" Margin="0,5,10,10"/>
-            </Grid>
-
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Button Text="Add"
-                        Grid.Row="0"
-                        BackgroundColor="#171717"
-                        BorderColor="#d2d2d2"
-                            
-                        BorderWidth="1"
-                        TextColor="#d2d2d2"
-                        HorizontalOptions="Fill"/>
-                <CollectionView Grid.Row="1" ItemsSource="{Binding Path=Times}">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Span="1" Orientation="Vertical" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="Fill" HeightRequest="200">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="5*"/>
-                                </Grid.RowDefinitions>
-
-                                <Label Grid.Row="0" Text="{Binding Date}" FontSize="Medium" Margin="15,10,0,0" VerticalOptions="Start"/>
-                                <Label Grid.Row="1" Text="{Binding Hours}" FontSize="Caption" Margin="15,10,0,0" VerticalOptions="Start"/>
-                                <Label Grid.Row="2" Text="{Binding Narrative}" FontSize="Caption" Margin="15,10,0,0" VerticalOptions="Start"/>
-                            </Grid>                           
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>              
-            </Grid>
         </Grid>
+
     </Grid>
 </ContentPage>

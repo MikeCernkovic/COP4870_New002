@@ -14,7 +14,7 @@ namespace COP4870_New002.MAUI
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.99.45")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.99.67")]
 	public partial class Resource
 	{
 		

@@ -130,7 +130,9 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void Save()
         {
-            Client clientInList = Clients.SingleOrDefault(s => s.Id == TempClient.Id);
+            //Client clientInList = Clients.SingleOrDefault(s => s.Id == TempClient.Id);
+            Client clientInList = ClientService.Current.Get(TempClient.Id);
+
             //if client doesn't exist add to list
             if (clientInList == null)
             {

@@ -50,4 +50,9 @@ public partial class ClientMenuView : ContentPage
     {
         Shell.Current.GoToAsync("//Project");
     }
+
+    void Toolbar_EmployeesClicked(System.Object sender, System.EventArgs e)
+    {
+        Shell.Current.GoToAsync("//Employee");
+    }
 }
