@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 namespace COP4870_New002.Library.Models
 {
     public class Client : ICloneable

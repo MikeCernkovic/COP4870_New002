@@ -29,10 +29,10 @@ namespace COP4870_New002.Library.Services
         {
             times = new List<Time>
             {
-                new Time{Id=1, ProjectId = 1, Hours=0, EmployeeId=2, Narrative="Brushed teeth"},
-                new Time{Id=2, ProjectId = 2, Hours=0, EmployeeId=5, Narrative="Finished Homework"},
-                new Time{Id=3, ProjectId = 4, Hours=0, EmployeeId=2, Narrative="Walked the dog"},
-                new Time{Id=4, ProjectId = 3, Hours=0, EmployeeId=3, Narrative="Got Milk"}
+                //new Time{Id=1, ProjectId = 1, Hours=0, EmployeeId=2, Narrative="Brushed teeth"},
+                //new Time{Id=2, ProjectId = 2, Hours=0, EmployeeId=5, Narrative="Finished Homework"},
+                //new Time{Id=3, ProjectId = 4, Hours=0, EmployeeId=2, Narrative="Walked the dog"},
+                //new Time{Id=4, ProjectId = 3, Hours=0, EmployeeId=3, Narrative="Got Milk"}
             };
         }
 

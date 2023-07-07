@@ -69,7 +69,7 @@ namespace COP4870_New002.MAUI.ViewModels
                 {
                     return null;
                 }
-                return ClientService.Current.Get(SelectedProject.ClientId);
+                return BillService.Current.Get(SelectedProject.ClientId);
             }
             set
             {
@@ -175,7 +175,7 @@ namespace COP4870_New002.MAUI.ViewModels
         {
             get
             {
-                return new ObservableCollection<Client>(ClientService.Current.Clients);
+                return new ObservableCollection<Client>(BillService.Current.Clients);
             }
         }
 

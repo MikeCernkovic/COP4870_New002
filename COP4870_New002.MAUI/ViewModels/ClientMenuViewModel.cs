@@ -92,9 +92,9 @@ namespace COP4870_New002.MAUI.ViewModels
             {
                 if (string.IsNullOrEmpty(Query))
                 {
-                    return new ObservableCollection<Client>(ClientService.Current.Clients);
+                    return new ObservableCollection<Client>(BillService.Current.Clients);
                 }
-                return new ObservableCollection<Client>(ClientService.Current.SearchClients(Query));
+                return new ObservableCollection<Client>(BillService.Current.SearchClients(Query));
             }
         }
 
@@ -131,17 +131,17 @@ namespace COP4870_New002.MAUI.ViewModels
         public void Save()
         {
             //Client clientInList = Clients.SingleOrDefault(s => s.Id == TempClient.Id);
-            Client clientInList = ClientService.Current.Get(TempClient.Id);
+            Client clientInList = BillService.Current.Get(TempClient.Id);
 
             //if client doesn't exist add to list
             if (clientInList == null)
             {
-                ClientService.Current.Add(TempClient);
+                BillService.Current.Add(TempClient);
             }
             else
             {
                 var idx = Clients.IndexOf(clientInList);
-                ClientService.Current.Clients[idx] = TempClient;
+                BillService.Current.Clients[idx] = TempClient;
             }
 
             SelectedClient = TempClient;
@@ -160,7 +160,7 @@ namespace COP4870_New002.MAUI.ViewModels
             {
                 proj.ClientId = 0;
             }
-            ClientService.Current.Delete(SelectedClient);
+            BillService.Current.Delete(SelectedClient);
             SelectedClient = null;
             NotifyPropertyChanged("Clients");
         }

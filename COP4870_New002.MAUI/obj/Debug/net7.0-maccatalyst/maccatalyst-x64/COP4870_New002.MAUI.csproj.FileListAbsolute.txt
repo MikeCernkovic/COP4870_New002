@@ -264,4 +264,3 @@
 /Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/COP4870_New002.MAUI.pdb
 /Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/COP4870_New002.MAUI.genruntimeconfig.cache
 /Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/ref/COP4870_New002.MAUI.dll
-/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/resourcestamps/COP4870_New002.Library.stamp
