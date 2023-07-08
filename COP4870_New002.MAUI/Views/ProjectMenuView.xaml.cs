@@ -15,10 +15,10 @@ public partial class ProjectMenuView : ContentPage
         (BindingContext as ProjectMenuViewModel).EditProject();
     }
 
-    void EditTime_Clicked(System.Object sender, System.EventArgs e)
-    {
-        (BindingContext as ProjectMenuViewModel).EditTime();
-    }
+    //void EditTime_Clicked(System.Object sender, System.EventArgs e)
+    //{
+    //    (BindingContext as ProjectMenuViewModel).EditTime();
+    //}
 
 
     void DeleteProject_Clicked(System.Object sender, System.EventArgs e)
@@ -26,10 +26,10 @@ public partial class ProjectMenuView : ContentPage
         (BindingContext as ProjectMenuViewModel).DeleteProject();
     }
 
-    void DeleteTime_Clicked(System.Object sender, System.EventArgs e)
-    {
-        (BindingContext as ProjectMenuViewModel).DeleteTime();
-    }
+    //void DeleteTime_Clicked(System.Object sender, System.EventArgs e)
+    //{
+    //    (BindingContext as ProjectMenuViewModel).DeleteTime();
+    //}
 
 
     void AddProject_Clicked(System.Object sender, System.EventArgs e)
@@ -38,11 +38,11 @@ public partial class ProjectMenuView : ContentPage
         (BindingContext as ProjectMenuViewModel).AddProject();
     }
 
-    void AddTime_Clicked(System.Object sender, System.EventArgs e)
-    {
+    //void AddTime_Clicked(System.Object sender, System.EventArgs e)
+    //{
 
-        (BindingContext as ProjectMenuViewModel).AddTime();
-    }
+    //    (BindingContext as ProjectMenuViewModel).AddTime();
+    //}
 
 
     void SaveProject_Clicked(System.Object sender, System.EventArgs e)
@@ -50,10 +50,10 @@ public partial class ProjectMenuView : ContentPage
         (BindingContext as ProjectMenuViewModel).SaveProject();
     }
 
-    void SaveTime_Clicked(System.Object sender, System.EventArgs e)
-    {
-        (BindingContext as ProjectMenuViewModel).SaveTime();
-    }
+    //void SaveTime_Clicked(System.Object sender, System.EventArgs e)
+    //{
+    //    (BindingContext as ProjectMenuViewModel).SaveTime();
+    //}
 
 
     void Cancel_Clicked(System.Object sender, System.EventArgs e)

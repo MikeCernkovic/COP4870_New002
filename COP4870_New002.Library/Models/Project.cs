@@ -10,25 +10,6 @@ namespace COP4870_New002.Library.Models
         public string? Name { get; set; }
         public string? Notes { get; set; }
         public int ClientId { get; set; }
-        public string Status
-        {
-            get
-            {
-                if (IsActive)
-                {
-                    return "Active";
-                }
-                else
-                {
-                    return "Not Active";
-                }
-            }
-        }
-
-        public override string ToString()
-        {
-            return $"{Id}\t{Name}";
-        }
 
         public object Clone()
         {

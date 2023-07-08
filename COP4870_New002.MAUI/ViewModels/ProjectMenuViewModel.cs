@@ -12,7 +12,7 @@ namespace COP4870_New002.MAUI.ViewModels
         public ProjectMenuViewModel()
         {
             DisplayProjectContent = true;
-            DisplayTimeContent = true;
+            //DisplayTimeContent = true;
         }
 
         public Project tempProject;
@@ -33,43 +33,43 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        public Time tempTime;
-        private Time selectedtime;
-        public Time SelectedTime
-        {
-            get
-            {
-                return selectedtime;
-            }
-            set
-            {
-                selectedtime = value;
-                if(selectedtime != null)
-                {
-                    SelectedEmployee = EmployeeService.Current.Get(selectedtime.EmployeeId);
-                }
-                else
-                {
-                    SelectedEmployee = null;
-                }
-                
-                DisplayTimeContent = true;
-                NotifyPropertyChanged();
-            }
-        }
+        //public Time tempTime;
+        //private Time selectedtime;
+        //public Time SelectedTime
+        //{
+        //    get
+        //    {
+        //        return selectedtime;
+        //    }
+        //    set
+        //    {
+        //        selectedtime = value;
+        //        if(selectedtime != null)
+        //        {
+        //            SelectedEmployee = EmployeeService.Current.Get(selectedtime.EmployeeId);
+        //        }
+        //        else
+        //        {
+        //            SelectedEmployee = null;
+        //        }
 
-        public Employee SelectedEmployee { get; set; }
+        //        DisplayTimeContent = true;
+        //        NotifyPropertyChanged();
+        //    }
+        //}
+
+        //public Employee SelectedEmployee { get; set; }
 
         private Client selectedclient;
         public Client SelectedClient
         {
             get
             {
-                if(SelectedProject == null)
+                if (SelectedProject == null)
                 {
                     return null;
                 }
-                return BillService.Current.Get(SelectedProject.ClientId);
+                return ClientService.Current.Get(SelectedProject.ClientId);
             }
             set
             {
@@ -115,28 +115,28 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        private bool displaytimecontent;
-        public bool DisplayTimeContent
-        {
-            get
-            {
-                return displaytimecontent;
-            }
+        //private bool displaytimecontent;
+        //public bool DisplayTimeContent
+        //{
+        //    get
+        //    {
+        //        return displaytimecontent;
+        //    }
 
-            set
-            {
-                displaytimecontent = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged("DisplayTimeEdit");
-            }
-        }
-        public bool DisplayTimeEdit
-        {
-            get
-            {
-                return !(displaytimecontent);
-            }
-        }
+        //    set
+        //    {
+        //        displaytimecontent = value;
+        //        NotifyPropertyChanged();
+        //        NotifyPropertyChanged("DisplayTimeEdit");
+        //    }
+        //}
+        //public bool DisplayTimeEdit
+        //{
+        //    get
+        //    {
+        //        return !(displaytimecontent);
+        //    }
+        //}
 
         public ObservableCollection<Project> Projects
         {
@@ -150,78 +150,76 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        public ObservableCollection<Time> Times
-        {
-            get
-            {
-                if (selectedproject != null)
-                {
-                    var time_list = new ObservableCollection<Time>(TimeService.Current.Times.Where(t => t.ProjectId == selectedproject.Id));
-                    return time_list;
-                }
-                return new ObservableCollection<Time>();
-            }
-        }
+        //public ObservableCollection<Time> Times
+        //{
+        //    get
+        //    {
+        //        if (selectedproject != null)
+        //        {
+        //            var time_list = new ObservableCollection<Time>(TimeService.Current.Times.Where(t => t.ProjectId == selectedproject.Id));
+        //            return time_list;
+        //        }
+        //        return new ObservableCollection<Time>();
+        //    }
+        //}
 
-        public ObservableCollection<Employee> Employees
-        {
-            get
-            {
-                return new ObservableCollection<Employee>(EmployeeService.Current.Employees);
-            }
-        }
+        //public ObservableCollection<Employee> Employees
+        //{
+        //    get
+        //    {
+        //        return new ObservableCollection<Employee>(EmployeeService.Current.Employees);
+        //    }
+        //}
 
-        public ObservableCollection<Client> Clients
-        {
-            get
-            {
-                return new ObservableCollection<Client>(BillService.Current.Clients);
-            }
-        }
+        //public ObservableCollection<Client> Clients
+        //{
+        //    get
+        //    {
+        //        return new ObservableCollection<Client>(BillService.Current.Clients);
+        //    }
+        //}
 
-        public void AddTime()
-        {
-            tempTime = SelectedTime;
-            SelectedTime = new Time();
-            DisplayTimeContent = false;
-        }
+        //public void AddTime()
+        //{
+        //    tempTime = SelectedTime;
+        //    SelectedTime = new Time();
+        //    DisplayTimeContent = false;
+        //}
 
-        public void EditTime()
-        {
-            tempTime = SelectedTime;
-            SelectedTime = (Time)tempTime.Clone();
-            DisplayTimeContent = false;
-        }
+        //public void EditTime()
+        //{
+        //    tempTime = SelectedTime;
+        //    SelectedTime = (Time)tempTime.Clone();
+        //    DisplayTimeContent = false;
+        //}
 
-        public void SaveTime()
-        {
-            SelectedTime.EmployeeId = SelectedEmployee.Id;
-            SelectedTime.ProjectId = SelectedProject.Id;
+        //public void SaveTime()
+        //{
+        //    SelectedTime.EmployeeId = SelectedEmployee.Id;
+        //    SelectedTime.ProjectId = SelectedProject.Id;
 
-            Time timeInList = TimeService.Current.Get(SelectedTime.Id);
-            if(timeInList == null)
-            {
-                TimeService.Current.Add(SelectedTime);
-            }
-            else
-            {
-                var idx = TimeService.Current.Times.IndexOf(tempTime);
-                TimeService.Current.Times[idx] = SelectedTime;
-            }
+        //    Time timeInList = TimeService.Current.Get(SelectedTime.Id);
+        //    if(timeInList == null)
+        //    {
+        //        TimeService.Current.Add(SelectedTime);
+        //    }
+        //    else
+        //    {
+        //        var idx = TimeService.Current.Times.IndexOf(tempTime);
+        //        TimeService.Current.Times[idx] = SelectedTime;
+        //    }
 
-            DisplayTimeContent = true;
-            NotifyPropertyChanged("Times");
-            NotifyPropertyChanged("SelectedTime");
-        }
+        //    DisplayTimeContent = true;
+        //    NotifyPropertyChanged("Times");
+        //    NotifyPropertyChanged("SelectedTime");
+        //}
 
-        public void DeleteTime()
-        {
-            TimeService.Current.Delete(SelectedTime);
-            SelectedTime = null;
-            NotifyPropertyChanged("Times");
-        }
-
-
+        //public void DeleteTime()
+        //{
+        //    TimeService.Current.Delete(SelectedTime);
+        //    SelectedTime = null;
+        //    NotifyPropertyChanged("Times");
+        //}
 
         public void AddProject()
         {
@@ -253,8 +251,8 @@ namespace COP4870_New002.MAUI.ViewModels
                 ProjectService.Current.Projects[idx] = SelectedProject;
             }
 
-            SelectedTime = null;
-            DisplayTimeContent = true;
+            //SelectedTime = null;
+            //DisplayTimeContent = true;
             DisplayProjectContent = true;
             NotifyPropertyChanged("Projects");
             NotifyPropertyChanged("SelectedClient");
@@ -263,12 +261,12 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void DeleteProject()
         {
-            foreach(Time time in Times)
-            {
-                TimeService.Current.Delete(time.Id);
-            }
+            //foreach(Time time in Times)
+            //{
+            //    TimeService.Current.Delete(time.Id);
+            //}
             ProjectService.Current.Delete(SelectedProject);
-            SelectedTime = null;
+            //SelectedTime = null;
             SelectedProject = null;
             NotifyPropertyChanged("Projects");
         }
@@ -277,10 +275,10 @@ namespace COP4870_New002.MAUI.ViewModels
         public void Cancel()
         {
             SelectedProject = tempProject;
-            SelectedTime = tempTime;
+            //SelectedTime = tempTime;
 
             DisplayProjectContent = true;
-            DisplayTimeContent = true;
+            //DisplayTimeContent = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

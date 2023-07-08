@@ -24,30 +24,47 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Stroke="#d2d2d2" StrokeThickness="1">
-            <Grid VerticalOptions="Fill">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Entry Grid.Column="0" Text="{Binding Path=Query}"
-                        Placeholder="Enter Name" BackgroundColor="#171717" TextColor="#d2d2d2"/>
-                <ListView Grid.Row="1" VerticalOptions="FillAndExpand"
-                            ItemsSource="{Binding Path=Projects}"
-                        SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}"/>
-                <Button Text="Add"
-                        Grid.Row="2"
-                        BackgroundColor="#171717"
-                        BorderColor="#d2d2d2"
-                        Clicked="AddProject_Clicked"
-                        BorderWidth="1"
-                        TextColor="#d2d2d2"
-                        HorizontalOptions="Fill"
-                        VerticalOptions="End"/>
-            </Grid>
-        </Border>
-                
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Column="0" Stroke="#d2d2d2" StrokeThickness="1">
+                <Grid VerticalOptions="Fill">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Entry Text="{Binding Path=Query}" Placeholder="Enter Name" BackgroundColor="#171717" TextColor="#d2d2d2"/>
+                    </Grid>
+                    <Button Text="Add"
+                            Grid.Row="1"
+                            BackgroundColor="#171717"
+                            BorderColor="#d2d2d2"
+                            Clicked="AddProject_Clicked"
+                            BorderWidth="1"
+                            TextColor="#d2d2d2"
+                            HorizontalOptions="Fill"/>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1">
+                <ListView ItemsSource="{Binding Path=Projects}"
+                            SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Label HorizontalOptions="Center" VerticalTextAlignment="Center" Text="{Binding Name}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </Border>
+        </Grid>
 
         <!--Display-->
         <Grid Grid.Column="1"
@@ -130,7 +147,7 @@
                     </Grid>
                 </Grid>
 
-                <Border Grid.Column="1">
+                <!--<Border Grid.Column="1">
                     <Grid VerticalOptions="Fill">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -156,9 +173,7 @@
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="auto" />
                                                     <ColumnDefinition Width="1*"/>
-                                                    <!--<ColumnDefinition Width="1*"/>-->
                                                 </Grid.ColumnDefinitions>
-                                                <!--<Label Grid.Column="0" Text="Name" FontSize="Caption" Margin="10,10,0,0" VerticalOptions="Start"/>-->
                                                 <Label Grid.Column="0" Text="Hours:" FontSize="Caption" Margin="10,10,0,0" VerticalOptions="Start" HorizontalOptions="Start"/>
                                                 <Label Grid.Column="1" Text="{Binding Hours}" FontSize="Caption" Margin="3,10,0,0" VerticalOptions="Start" HorizontalOptions="Start"/>
                                             </Grid>
@@ -178,11 +193,11 @@
                                 TextColor="#d2d2d2"
                                 HorizontalOptions="Fill"/>
                     </Grid>
-                </Border>
+                </Border>-->
             </Grid>
 
             <!--Display Time--> 
-            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1" 
+            <!--<Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1" 
                     IsVisible="{Binding Path=DisplayTimeContent}" IsEnabled="{Binding Path=DisplayTimeContent}">                           
                 <Grid Padding="10">
                     <Grid.ColumnDefinitions>
@@ -232,10 +247,10 @@
                                 Margin="2"/>
                     </Grid>
                 </Grid> 
-            </Border>
+            </Border>-->
 
             <!--Edit Time--> 
-            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1"
+            <!--<Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1"
                     IsVisible="{Binding Path=DisplayTimeEdit}" IsEnabled="{Binding Path=DisplayTimeEdit}">                           
                 <Grid Padding="10">
                     <Grid.ColumnDefinitions>
@@ -319,7 +334,7 @@
                                 Margin="2"/>
                     </Grid>
                 </Grid> 
-            </Border>   
+            </Border>-->   
         </Grid>
         
         <!--Edit-->
