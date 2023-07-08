@@ -4,6 +4,7 @@ using COP4870_New002.Library.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+//using COP4870_New002.Library;
 
 namespace COP4870_New002.MAUI.ViewModels
 {
@@ -61,7 +62,19 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        public string Query { get; set; }
+        private string query;
+        public string Query
+        {
+            get
+            {
+                return query;
+            }
+            set
+            {
+                query = value;
+                NotifyPropertyChanged("Clients");
+            }
+        }
 
         private bool display = true;
         public bool DisplayContent
@@ -86,6 +99,35 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
+        //IsVisible="{Binding Path=DisplayBills}" IsEnabled="{Binding Path=DisplayBills}"
+        private string selectedmenucategory = string.Empty;
+        public string MenuCategory
+        {
+            set
+            {
+                selectedmenucategory = value;
+                NotifyPropertyChanged(nameof(DisplayProjects));
+                NotifyPropertyChanged(nameof(DisplayBills));
+            }
+        }
+
+        public bool DisplayProjects
+        {
+            get
+            {
+                return selectedmenucategory.Equals("Projects");
+            }
+        }
+        public bool DisplayBills
+        {
+            get
+            {
+                return selectedmenucategory.Equals("Bills");
+            }
+        }
+
+
+
         public ObservableCollection<Client> Clients
         {
             get
@@ -108,6 +150,19 @@ namespace COP4870_New002.MAUI.ViewModels
                 }
 
                 return new ObservableCollection<Project>();
+            }
+        }
+
+        public ObservableCollection<Bill> Bills
+        {
+            get
+            {   //get all projects whos clientId = selectedclient.id
+                if (selectedclient != null)
+                {
+                    return new ObservableCollection<Bill>(BillService.Current.Bills.Where(b => b.ClientId == selectedclient.Id));
+                }
+
+                return new ObservableCollection<Bill>();
             }
         }
 

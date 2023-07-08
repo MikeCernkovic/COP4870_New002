@@ -1,11 +1,12 @@
 ﻿using System;
-namespace COP4870_New002.Library
+namespace COP4870_New002.Library.Models
 {
 	public class Bill : ICloneable
 	{
         public int Id { get; set; }
         public double TotalAmount { get; set; }
         public DateTime DueDate { get; set; }
+        public int ClientId { get; set; }
         public int ProjectId { get; set; }
         public bool IsActive { get; set; }
 

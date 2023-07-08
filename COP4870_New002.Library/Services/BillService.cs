@@ -29,10 +29,23 @@ namespace COP4870_New002.Library.Services
         {
             bills = new List<Bill>
             {
+                new Bill{ Id = 2, IsActive = true, ClientId = 1, ProjectId = 1, DueDate = new DateTime(2012,06,20,0,0,0)},
+                new Bill{ Id = 3, IsActive = true, ClientId = 1, ProjectId = 1, DueDate = new DateTime(2013,07,09,0,0,0)},
+                new Bill{ Id = 4, IsActive = true, ClientId = 1, ProjectId = 1, DueDate = new DateTime(2016,08,09,0,0,0)},
+                new Bill{ Id = 5, IsActive = true, ClientId = 2, ProjectId = 1, DueDate = new DateTime(2010,09,09,0,0,0)},
+                new Bill{ Id = 6, IsActive = true, ClientId = 2, ProjectId = 1, DueDate = new DateTime(2029,02,10,0,0,0)}
             };
         }
 
+        public List<Bill> Bills
+        {
+            get { return bills; }
+        }
 
+        public Bill? Get(int id)
+        {
+            return Bills.FirstOrDefault(e => e.Id == id);
+        }
 
 
     }
