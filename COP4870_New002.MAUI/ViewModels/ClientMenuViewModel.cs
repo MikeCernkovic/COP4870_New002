@@ -43,7 +43,9 @@ namespace COP4870_New002.MAUI.ViewModels
                 selectedclient = value;
                 DisplayContent = true;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged("Projects");
+                //NotifyPropertyChanged(nameof(DisplayContent));
+                NotifyPropertyChanged(nameof(DisplayProjects));
+                NotifyPropertyChanged(nameof(DisplayBills));
             }
         }
 
@@ -57,6 +59,21 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 selectedproject = value;
+                DisplayContent = true;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private Bill selectedbill;
+        public Bill SelectedBill
+        {
+            get
+            {
+                return selectedbill;
+            }
+            set
+            {
+                selectedbill = value;
                 DisplayContent = true;
                 NotifyPropertyChanged();
             }
@@ -106,6 +123,7 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 selectedmenucategory = value;
+                NotifyPropertyChanged(nameof(DisplayContent));
                 NotifyPropertyChanged(nameof(DisplayProjects));
                 NotifyPropertyChanged(nameof(DisplayBills));
             }
@@ -115,6 +133,7 @@ namespace COP4870_New002.MAUI.ViewModels
         {
             get
             {
+                NotifyPropertyChanged("Projects");
                 return selectedmenucategory.Equals("Projects");
             }
         }
@@ -122,6 +141,7 @@ namespace COP4870_New002.MAUI.ViewModels
         {
             get
             {
+                NotifyPropertyChanged("Bills");
                 return selectedmenucategory.Equals("Bills");
             }
         }
@@ -200,6 +220,7 @@ namespace COP4870_New002.MAUI.ViewModels
             }
 
             SelectedClient = TempClient;
+            MenuCategory = string.Empty;
             NotifyPropertyChanged("Clients");
         }
 
@@ -218,6 +239,8 @@ namespace COP4870_New002.MAUI.ViewModels
             ClientService.Current.Delete(SelectedClient);
             SelectedClient = null;
             NotifyPropertyChanged("Clients");
+            NotifyPropertyChanged(nameof(DisplayProjects));
+            NotifyPropertyChanged(nameof(DisplayBills));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

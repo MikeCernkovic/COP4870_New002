@@ -38,16 +38,16 @@ public partial class ProjectMenuView : ContentPage
         (BindingContext as ProjectMenuViewModel).AddProject();
     }
 
-    //void AddTime_Clicked(System.Object sender, System.EventArgs e)
-    //{
+    void AddBill_Clicked(System.Object sender, System.EventArgs e)
+    {
 
-    //    (BindingContext as ProjectMenuViewModel).AddTime();
-    //}
+        //(BindingContext as ProjectMenuViewModel).AddTime();
+    }
 
 
     void SaveProject_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ProjectMenuViewModel).SaveProject();
+        //(BindingContext as ProjectMenuViewModel).SaveProject();
     }
 
     //void SaveTime_Clicked(System.Object sender, System.EventArgs e)

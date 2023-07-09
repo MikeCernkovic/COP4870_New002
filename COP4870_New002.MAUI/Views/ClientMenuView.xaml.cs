@@ -41,16 +41,6 @@ public partial class ClientMenuView : ContentPage
         (BindingContext as ClientMenuViewModel).Cancel();
     }
 
-    void DisplayProjects_Clicked(System.Object sender, System.EventArgs e)
-    {
-        //(BindingContext as ClientMenuViewModel).DisplayProjects();
-    }
-
-    void DisplayBills_Clicked(System.Object sender, System.EventArgs e)
-    {
-        //(BindingContext as ClientMenuViewModel).DisplayBills();
-    }
-
     void Toolbar_ClientsClicked(System.Object sender, System.EventArgs e)
     {
         Shell.Current.GoToAsync("//Client");

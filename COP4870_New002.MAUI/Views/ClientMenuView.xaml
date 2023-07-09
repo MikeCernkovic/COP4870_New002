@@ -3,6 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="COP4870_New002.MAUI.Views.ClientMenuView"
              Title="Client Menu">
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="RadioButtonTemplate">
+            <Grid RowDefinitions="30,4" Margin="15">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CheckedStates">
+                            <VisualState x:Name="Checked">
+                                <VisualState.Setters>
+                                    <Setter
+                                        TargetName="TextLabel"
+                                        Property="Label.TextColor"
+                                        Value="{StaticResource Primary}"/>
+                                    <Setter
+                                        TargetName="Indicator"
+                                        Property="BoxView.Color"
+                                        Value="{StaticResource Primary}"/>
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Unchecked">
+                                <VisualState.Setters>
+                                    <Setter
+                                        TargetName="TextLabel"
+                                        Property="Label.TextColor"
+                                        Value="White"/>
+                                    <Setter
+                                        TargetName="Indicator"
+                                        Property="BoxView.Color"
+                                        Value="Transparent"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+                <Label Text="{TemplateBinding Content, Mode=TwoWay}" x:Name="TextLabel" FontSize="Subtitle"/>
+                <BoxView x:Name="Indicator" Grid.Row="1" Color="#d2d2d2"/>
+            </Grid>
+        </ControlTemplate>
+
+        <Style TargetType="RadioButton">
+            <Setter Property="ControlTemplate"
+                    Value="{StaticResource RadioButtonTemplate}" />
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Text="Clients"
@@ -150,111 +194,12 @@
                 </Grid.RowDefinitions>
                 <HorizontalStackLayout RadioButtonGroup.GroupName="MenuCategories"
                              RadioButtonGroup.SelectedValue="{Binding MenuCategory}">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CheckedStates">
-                                <VisualState x:Name="Checked">
-                                    <VisualState.Setters>
-                                        <Setter
-                                            Property="Label.TextColor"
-                                            Value="{StaticResource Primary}"/>
-                                        <Setter
-                                            Property="BoxView.Color"
-                                            Value="{StaticResource Primary}"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-
-                                <VisualState x:Name="Unchecked">
-                                    <VisualState.Setters>
-                                        <Setter
-                                            Property="Label.TextColor"
-                                            Value="White"/>
-                                        <Setter
-                                            Property="BoxView.Color"
-                                            Value="Transparent"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-
-                    <RadioButton Value="Projects">
-                        <RadioButton.Content>
-                            <Grid RowDefinitions="30,4">
-
-                                <Label Text="Projects" FontSize="Subtitle"/>
-                                <BoxView Grid.Row="1" Color="#d2d2d2"/>
-                            </Grid>
-                        </RadioButton.Content>
-                    </RadioButton>
-                    <RadioButton Value="Bills">
-                        <RadioButton.Content>
-                            <Grid RowDefinitions="30,4">
-                                
-                                <Label Text="Bills" FontSize="Subtitle"/>
-                                <BoxView Grid.Row="1" Color="#d2d2d2"/>
-                            </Grid>
-                        </RadioButton.Content>
-                    </RadioButton>
+                    <RadioButton Content="Projects" Value="Projects"/>
+                    <RadioButton Content="Bills" Value="Bills"/>
                 </HorizontalStackLayout>
-                <!--<HorizontalStackLayout RadioButtonGroup.GroupName="MenuCategories">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <RadioButton Content="{Binding ., Mode=TwoWay}" CheckedChanged="RadioButton_CheckedChanged" Margin="15,0,0,0">
-                                <RadioButton.ControlTemplate>
-                                    <ControlTemplate>
-                                        <Grid RowDefinitions="30,4">
-                                            <VisualStateManager.VisualStateGroups>
-                                                <VisualStateGroupList>
-                                                    <VisualStateGroup x:Name="CheckedStates">
-                                                        <VisualState x:Name="Checked">
-                                                            <VisualState.Setters>
-                                                                <Setter
-                                                                    TargetName="TextLabel"
-                                                                    Property="Label.TextColor"
-                                                                    Value="{StaticResource Primary}"/>
-                                                                <Setter
-                                                                    TargetName="Indicator"
-                                                                    Property="BoxView.Color"
-                                                                    Value="{StaticResource Primary}"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
 
-                                                        <VisualState x:Name="Unchecked">
-                                                            <VisualState.Setters>
-                                                                <Setter
-                                                                    TargetName="TextLabel"
-                                                                    Property="Label.TextColor"
-                                                                    Value="White"/>
-                                                                <Setter
-                                                                    TargetName="Indicator"
-                                                                    Property="BoxView.Color"
-                                                                    Value="Transparent"/>
-                                                            </VisualState.Setters>
-                                                        </VisualState>
-                                                    </VisualStateGroup>
-                                                </VisualStateGroupList>
-                                            </VisualStateManager.VisualStateGroups>
-                                            <Label Text="{TemplateBinding Content, Mode=TwoWay}" x:Name="TextLabel" FontSize="Subtitle"/>
-                                            <BoxView x:Name="Indicator" Grid.Row="1" Color="#d2d2d2"/>
-                                        </Grid>
-                                    </ControlTemplate>
-                                </RadioButton.ControlTemplate>
-                            </RadioButton>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-
-                    <BindableLayout.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Projects</x:String>
-                            <x:String>Bills</x:String>
-                            <x:String>Other</x:String>
-                        </x:Array>
-                    </BindableLayout.ItemsSource>
-                </HorizontalStackLayout>-->
-
-                <Grid Grid.Row="1" IsVisible="{Binding Path=DisplayProjects}" IsEnabled="{Binding Path=DisplayProjects}" BackgroundColor="Blue">
-                    <!--<Border Stroke="#d2d2d2" StrokeThickness="1" >
+                <Grid Grid.Row="1" IsVisible="{Binding Path=DisplayProjects}" IsEnabled="{Binding Path=DisplayProjects}">
+                    <Border Stroke="#d2d2d2" StrokeThickness="1" >
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -273,7 +218,7 @@
 
                                 <Label Grid.Column="0" Text="Name" FontAttributes="Bold" FontSize="Large" Margin="10"/>
                                 <Label Grid.Column="1" Text="Active" FontAttributes="Bold" FontSize="Large" Margin="10"/>
-                                <Label Grid.Column="2" Text="xxx"/>
+                                <!--<Label Grid.Column="2" Text="xxx"/>-->
                         
                             </Grid>
                             <ListView Grid.Row="1" ItemsSource="{Binding Path=Projects}"
@@ -297,11 +242,54 @@
                                 </ListView.ItemTemplate>
                             </ListView> 
                         </Grid>       
-                    </Border>-->
+                    </Border>
                 </Grid>
                 
-                <Grid Grid.Row="1" IsVisible="{Binding Path=DisplayBills}" IsEnabled="{Binding Path=DisplayBills}" BackgroundColor="Red">
+                <Grid Grid.Row="1" IsVisible="{Binding Path=DisplayBills}" IsEnabled="{Binding Path=DisplayBills}">
+                    <Border Stroke="#d2d2d2" StrokeThickness="1" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" BackgroundColor="Transparent">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
 
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0" Text="Due Date" FontAttributes="Bold" FontSize="Large" Margin="10"/>
+                                <Label Grid.Column="1" Text="Active" FontAttributes="Bold" FontSize="Large" Margin="10"/>
+                                <Label Grid.Column="2" Text="Amount" FontAttributes="Bold" FontSize="Large" Margin="10"/>
+                        
+                            </Grid>
+                            <ListView Grid.Row="1" ItemsSource="{Binding Path=Bills}"
+                                    SelectedItem="{Binding Path=SelectedBill, Mode=TwoWay}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label Grid.Column="0" VerticalTextAlignment="Center" Text="{Binding DueDate}" FontSize="Body" Margin="10,5,10,10"/>
+                                                <Label Grid.Column="1" VerticalTextAlignment="Center" Text="{Binding IsActive}" FontSize="Body" Margin="10,5,10,10"/>
+                                                <Label Grid.Column="2" VerticalTextAlignment="Center" Text="{Binding TotalAmount}" FontSize="Body" Margin="10,5,10,10"/>
+
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView> 
+                        </Grid>       
+                    </Border>
                 </Grid>
             </Grid>
         </Grid>

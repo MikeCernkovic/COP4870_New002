@@ -34,10 +34,10 @@ namespace COP4870_New002.Library.Services
         {
             clients = new List<Client>
             {
-                    new Client { Id = 1, Name = "Elon Musk", IsActive = true,       OpenDate = new DateTime(2019,05,09,0,0,0), Notes = "Super rich Billionaire."},
-                    new Client { Id = 2, Name = "John Paul", IsActive = false,      OpenDate = new DateTime(2020,03,10,9,0,0), Notes = "A pirate maybe"},
-                    new Client { Id = 3, Name = "Jack Sparrow", IsActive = true,    OpenDate = new DateTime(2015,06,22,1,0,0), Notes = "The Real pirate"},
-                    new Client { Id = 4, Name = "DOD", IsActive = true,             OpenDate = new DateTime(2012,09,06,2,0,0), Notes = "Government Department of Defense."}
+                new Client { Id = 1, Name = "Elon Musk", IsActive = true,       OpenDate = new DateTime(2019,05,09,0,0,0), Notes = "Super rich Billionaire."},
+                new Client { Id = 2, Name = "John Paul", IsActive = false,      OpenDate = new DateTime(2020,03,10,9,0,0), Notes = "A pirate maybe"},
+                new Client { Id = 3, Name = "Jack Sparrow", IsActive = true,    OpenDate = new DateTime(2015,06,22,1,0,0), Notes = "The Real pirate"},
+                new Client { Id = 4, Name = "DOD", IsActive = true,             OpenDate = new DateTime(2012,09,06,2,0,0), Notes = "Government Department of Defense."}
             };
         }
 
