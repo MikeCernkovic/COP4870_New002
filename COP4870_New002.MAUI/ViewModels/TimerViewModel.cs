@@ -5,19 +5,25 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace COP4870_New002.MAUI.ViewModels
 {
 	public class TimerViewModel
 	{
         public Project Project { get; set; }
-        //public List<Project> Projects
-        //{
-        //    get
-        //    {
-        //        return ProjectService.Current.Projects;
-        //    }
-        //}
+        public List<Project> Projects
+        {
+            get
+            {
+                return ProjectService.Current.Projects;
+            }
+        }
 
         public string TimerDisplay
         {
@@ -47,8 +53,8 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public ICommand StartCommand { get; private set; }
         public ICommand StopCommand { get; private set; }
-
         public ICommand SubmitCommand { get; private set; }
+
         public void ExecuteStart()
         {
             stopwatch.Start();
@@ -71,6 +77,7 @@ namespace COP4870_New002.MAUI.ViewModels
             StopCommand = new Command(ExecuteStop);
             SubmitCommand = new Command(ExecuteSubmit);
         }
+
         public TimerViewModel(int projectId, Window parentWindow)
         {
             Project = ProjectService.Current.Get(projectId) ?? new Project();

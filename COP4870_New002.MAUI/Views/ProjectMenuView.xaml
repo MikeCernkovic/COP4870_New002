@@ -340,9 +340,7 @@
                         </Grid.RowDefinitions>
                         <Button Text="Add Time"
                                 Grid.Row="0"
-                                Command="{Binding Path=SelectedBill.TimerCommand}" 
-                                CommandParameter="{Binding}"
-                                Clicked="AddTime_Clicked"
+                                Clicked="Timer_Clicked"
                                 BackgroundColor="#171717"
                                 BorderColor="#d2d2d2"
                                 BorderWidth="1"

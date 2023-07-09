@@ -50,7 +50,11 @@ namespace COP4870_New002.Library.Services
 
         public void Add(Bill bill)
         {
-
+            if (bill != null)
+            {
+                bill.Id = bills.Last().Id + 1;
+                bills.Add(bill);
+            }
         }
 
         public void Delete(int Id)

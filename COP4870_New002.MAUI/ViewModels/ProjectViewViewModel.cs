@@ -161,12 +161,21 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        //public void AddTime()
-        //{
-        //    tempTime = SelectedTime;
-        //    SelectedTime = new Time();
-        //    DisplayTimeContent = false;
-        //}
+        public void AddBill()
+        {
+            if(SelectedProject != null)
+            {
+                var newbill = new Bill()
+                {
+                    TotalAmount = 0,
+                    ProjectId = SelectedProject.Model.Id,
+                    ClientId = SelectedProject.Model.ClientId,
+                    IsActive = true
+                };
+                BillService.Current.Add(newbill);
+                NotifyPropertyChanged(nameof(Bills));
+            }
+        }
 
         //public void EditTime()
         //{
@@ -203,19 +212,28 @@ namespace COP4870_New002.MAUI.ViewModels
         //    NotifyPropertyChanged("Times");
         //}
 
-        public void AddProject()
+        //public void AddProject()
+        //{
+        //    //tempProject = SelectedProject;
+        //    //SelectedProject = new Project();
+        //    //DisplayProjectContent = false;
+        //}
+
+        public void Timer()
         {
-            //tempProject = SelectedProject;
-            //SelectedProject = new Project();
-            //DisplayProjectContent = false;
+            if(selectedbill != null)
+            {
+                SelectedBill.ExecuteTimer();
+            }
         }
 
-        public void EditProject()
-        {
-            //tempProject = SelectedProject;
-            //SelectedProject = (Project)tempProject.Clone();
-            //DisplayProjectContent = false;
-        }
+
+        //public void EditProject()
+        //{
+        //    //tempProject = SelectedProject;
+        //    //SelectedProject = (Project)tempProject.Clone();
+        //    //DisplayProjectContent = false;
+        //}
 
         //public void SaveProject()
         //{
@@ -243,16 +261,22 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void DeleteProject()
         {
-            ProjectService.Current.Delete(SelectedProject.Model.Id);
-            SelectedProject = null;
-            NotifyPropertyChanged(nameof(Projects));
+            if(selectedproject != null)
+            {
+                ProjectService.Current.Delete(SelectedProject.Model.Id);
+                SelectedProject = null;
+                NotifyPropertyChanged(nameof(Projects));
+            }
         }
 
         public void DeleteBill()
         {
-            BillService.Current.Delete(SelectedBill.Model.Id);
-            SelectedBill = null;
-            NotifyPropertyChanged(nameof(Bills));
+            if(selectedbill != null)
+            {
+                BillService.Current.Delete(SelectedBill.Model.Id);
+                SelectedBill = null;
+                NotifyPropertyChanged(nameof(Bills));
+            }
         }
 
         public void RefreshTimes()

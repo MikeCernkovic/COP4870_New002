@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSRequiresIPhoneOS</key>
+	<key>iPhone</key>
 	<true/>
 	<key>UIDeviceFamily</key>
 	<array>
@@ -28,5 +28,22 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>UIApplicationSceneManifest</key>
+    <dict>
+     <key>UIApplicationSupportsMultipleScenes</key>
+     <true/>
+         <key>UISceneConfigurations</key>
+     <dict>
+    <key>UIWindowSceneSessionRoleApplication</key>
+    <array>
+	    <dict>   
+		    <key>UISceneDelegateClassName</key>		    
+		    <string>SceneDelegate</string>		    
+		    <key>UISceneConfigurationName</key>		    
+		    <string>__MAUI_DEFAULT_SCENE_CONFIGURATION__</string>    
+	    </dict>
+    </array>
+</dict>
+</dict>
 </dict>
 </plist>
