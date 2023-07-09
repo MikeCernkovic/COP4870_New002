@@ -26,14 +26,12 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 selectedproject = value;
-                //SelectedTime = null;
                 NotifyPropertyChanged();
-                //NotifyPropertyChanged("SelectedClient");
-                NotifyPropertyChanged("Bills");
+                NotifyPropertyChanged(nameof(Bills));
+                NotifyPropertyChanged(nameof(Times));
             }
         }
 
-        //public Bill tempTime;
         private Bill selectedbill;
         public Bill SelectedBill
         {
@@ -44,38 +42,25 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 selectedbill = value;
-                //if (selectedtime != null)
-                //{
-                //    SelectedEmployee = EmployeeService.Current.Get(selectedtime.EmployeeId);
-                //}
-                //else
-                //{
-                //    SelectedEmployee = null;
-                //}
-
-                //DisplayTimeContent = true;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Times));
             }
         }
 
-        //public Employee SelectedEmployee { get; set; }
-
-        //private Client selectedclient;
-        //public Client SelectedClient
-        //{
-        //    get
-        //    {
-        //        if (SelectedProject == null)
-        //        {
-        //            return null;
-        //        }
-        //        return ClientService.Current.Get(SelectedProject.ClientId);
-        //    }
-        //    set
-        //    {
-        //        selectedclient = value;
-        //    }
-        //}
+        public Time tempTime;
+        private Time selectedtime;
+        public Time SelectedTime
+        {
+            get
+            {
+                return selectedtime;
+            }
+            set
+            {
+                selectedtime = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         private string query;
         public string Query
@@ -162,21 +147,17 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        //public ObservableCollection<Employee> Employees
-        //{
-        //    get
-        //    {
-        //        return new ObservableCollection<Employee>(EmployeeService.Current.Employees);
-        //    }
-        //}
-
-        //public ObservableCollection<Client> Clients
-        //{
-        //    get
-        //    {
-        //        return new ObservableCollection<Client>(BillService.Current.Clients);
-        //    }
-        //}
+        public ObservableCollection<Time> Times
+        {
+            get
+            {
+                if (selectedbill != null)
+                {
+                    return new ObservableCollection<Time>(TimeService.Current.Times.Where(t => t.BillId == selectedbill.Id));
+                }
+                return new ObservableCollection<Time>();
+            }
+        }
 
         //public void AddTime()
         //{

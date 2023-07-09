@@ -15,10 +15,10 @@ public partial class ProjectMenuView : ContentPage
         (BindingContext as ProjectMenuViewModel).EditProject();
     }
 
-    //void EditTime_Clicked(System.Object sender, System.EventArgs e)
-    //{
-    //    (BindingContext as ProjectMenuViewModel).EditTime();
-    //}
+    void EditBill_Clicked(System.Object sender, System.EventArgs e)
+    {
+        //(BindingContext as ProjectMenuViewModel).EditTime();
+    }
 
 
     void DeleteProject_Clicked(System.Object sender, System.EventArgs e)
@@ -26,10 +26,12 @@ public partial class ProjectMenuView : ContentPage
         (BindingContext as ProjectMenuViewModel).DeleteProject();
     }
 
-    //void DeleteTime_Clicked(System.Object sender, System.EventArgs e)
-    //{
-    //    (BindingContext as ProjectMenuViewModel).DeleteTime();
-    //}
+    void DeleteBill_Clicked(System.Object sender, System.EventArgs e)
+    {
+        //(BindingContext as ProjectMenuViewModel).DeleteTime();
+    }
+
+
 
 
     void AddProject_Clicked(System.Object sender, System.EventArgs e)
@@ -39,6 +41,12 @@ public partial class ProjectMenuView : ContentPage
     }
 
     void AddBill_Clicked(System.Object sender, System.EventArgs e)
+    {
+
+        //(BindingContext as ProjectMenuViewModel).AddTime();
+    }
+
+    void AddTime_Clicked(System.Object sender, System.EventArgs e)
     {
 
         //(BindingContext as ProjectMenuViewModel).AddTime();
