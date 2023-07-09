@@ -26,6 +26,7 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 selectedproject = value;
+                SelectedBill = null;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Bills));
                 NotifyPropertyChanged(nameof(Times));
@@ -42,6 +43,7 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 selectedbill = value;
+                SelectedTime = null;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Times));
             }
@@ -241,15 +243,25 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void DeleteProject()
         {
-            //foreach(Time time in Times)
-            //{
-            //    TimeService.Current.Delete(time.Id);
-            //}
-            //ProjectService.Current.Delete(SelectedProject);
-            //SelectedTime = null;
+            ProjectService.Current.Delete(SelectedProject.Model.Id);
             SelectedProject = null;
-            NotifyPropertyChanged("Projects");
+            NotifyPropertyChanged(nameof(Projects));
         }
+
+        public void DeleteBill()
+        {
+            BillService.Current.Delete(SelectedBill.Model.Id);
+            SelectedBill = null;
+            NotifyPropertyChanged(nameof(Bills));
+        }
+
+        public void RefreshTimes()
+        {
+            SelectedTime = null;
+            NotifyPropertyChanged(nameof(Times));
+        }
+
+
 
 
         public void Cancel()

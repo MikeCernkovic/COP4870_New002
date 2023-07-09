@@ -50,6 +50,7 @@ namespace COP4870_New002.Library.Services
         {
             if (time != null)
             {
+                //update bill amount
                 time.Id = times.Last().Id + 1;
                 times.Add(time);
             }
@@ -60,6 +61,7 @@ namespace COP4870_New002.Library.Services
             var timeToRemove = Get(id);
             if (timeToRemove != null)
             {
+                //update bill amount
                 times.Remove(timeToRemove);
             }
         }

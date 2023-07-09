@@ -1,6 +1,7 @@
 ﻿using COP4870_New002.Library.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -76,6 +77,11 @@ namespace COP4870_New002.Library.Services
             var projectToRemove = Get(id);
             if (projectToRemove != null)
             {
+                var Bills = new ObservableCollection<Bill>(BillService.Current.Bills.Where(b => b.ProjectId == projectToRemove.Id));
+                foreach (Bill bill in Bills)
+                {
+                    BillService.Current.Delete(bill.Id);
+                }
                 projects.Remove(projectToRemove);
             }
         }

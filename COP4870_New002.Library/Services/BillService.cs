@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using COP4870_New002.Library.Models;
 
 namespace COP4870_New002.Library.Services
@@ -50,6 +51,22 @@ namespace COP4870_New002.Library.Services
         public void Add(Bill bill)
         {
 
+        }
+
+        public void Delete(int Id)
+        {
+            //get bill
+            var billtoremove = Get(Id);
+            if(billtoremove != null)
+            {
+                //get times
+                var Times = new ObservableCollection<Time>(TimeService.Current.Times.Where(t => t.BillId == billtoremove.Id));
+                foreach(Time time in Times)
+                {
+                    TimeService.Current.Delete(time.Id);
+                }
+                bills.Remove(billtoremove);
+            }
         }
     }
 }

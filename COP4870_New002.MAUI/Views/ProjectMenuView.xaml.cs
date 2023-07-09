@@ -28,10 +28,13 @@ public partial class ProjectMenuView : ContentPage
 
     void DeleteBill_Clicked(System.Object sender, System.EventArgs e)
     {
-        //(BindingContext as ProjectMenuViewModel).DeleteTime();
+        (BindingContext as ProjectViewViewModel).DeleteBill();
     }
 
-
+    void DeleteTime_Clicked(System.Object sender, System.EventArgs e)
+    {
+        (BindingContext as ProjectViewViewModel).RefreshTimes();
+    }
 
 
     void AddProject_Clicked(System.Object sender, System.EventArgs e)

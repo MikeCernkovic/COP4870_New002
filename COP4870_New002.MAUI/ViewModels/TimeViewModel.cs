@@ -21,27 +21,29 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        private void ExecuteAdd()
+        public ICommand DeleteCommand { get; private set; }
+
+        private void ExecuteDelete()
         {
-            TimeService.Current.Add(Model);
+            TimeService.Current.Delete(Model.Id);
             //Shell.Current.GoToAsync($"//ClientDetail?clientId={Model.ClientId}");
+        }
+
+        private void SetupCommands()
+        {
+            DeleteCommand = new Command(ExecuteDelete);
         }
 
         public TimeViewModel()
         {
             Model = new Time();
+            SetupCommands();
         }
-
-        //public BillViewModel(int clientId)
-        //{
-
-        //    //Model = new Bill { ClientId = clientId };
-        //    SetupCommands();
-        //}
 
         public TimeViewModel(Time model)
         {
             Model = model;
+            SetupCommands();
         }
     }
 }
