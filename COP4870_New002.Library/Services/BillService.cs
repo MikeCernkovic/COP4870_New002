@@ -47,7 +47,10 @@ namespace COP4870_New002.Library.Services
             return Bills.FirstOrDefault(e => e.Id == id);
         }
 
+        public void Add(Bill bill)
+        {
 
+        }
     }
 }
 

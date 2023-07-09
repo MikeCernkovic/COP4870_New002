@@ -57,3 +57,9 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = COP4870_New002.MAUI.Views.ProjectMenuView.xaml
 build_metadata.AdditionalFiles.TargetPath = Views/ProjectMenuView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/ProjectMenuView.xaml
+
+[/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/Views/TimerView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = COP4870_New002.MAUI.Views.TimerView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/TimerView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/TimerView.xaml

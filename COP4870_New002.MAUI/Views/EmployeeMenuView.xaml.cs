@@ -7,38 +7,38 @@ public partial class EmployeeMenuView : ContentPage
     public EmployeeMenuView()
     {
         InitializeComponent();
-        BindingContext = new EmployeeMenuViewModel();
+        BindingContext = new EmployeeViewViewModel();
     }
 
     void Search_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as EmployeeMenuViewModel).Search();
+        (BindingContext as EmployeeViewViewModel).Search();
     }
 
     void Edit_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as EmployeeMenuViewModel).Edit();
+        (BindingContext as EmployeeViewViewModel).Edit();
     }
 
     void Delete_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as EmployeeMenuViewModel).Delete();
+        (BindingContext as EmployeeViewViewModel).Delete();
     }
 
     void Add_Clicked(System.Object sender, System.EventArgs e)
     {
 
-        (BindingContext as EmployeeMenuViewModel).Add();
+        (BindingContext as EmployeeViewViewModel).Add();
     }
 
     void Save_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as EmployeeMenuViewModel).Save();
+        (BindingContext as EmployeeViewViewModel).Save();
     }
 
     void Cancel_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as EmployeeMenuViewModel).Cancel();
+        (BindingContext as EmployeeViewViewModel).Cancel();
     }
 
     void Toolbar_ClientsClicked(System.Object sender, System.EventArgs e)

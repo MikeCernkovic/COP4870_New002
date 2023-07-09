@@ -7,12 +7,12 @@ public partial class ProjectMenuView : ContentPage
 	public ProjectMenuView()
 	{
 		InitializeComponent();
-        BindingContext = new ProjectMenuViewModel();
+        BindingContext = new ProjectViewViewModel();
     }
 
     void EditProject_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ProjectMenuViewModel).EditProject();
+        (BindingContext as ProjectViewViewModel).EditProject();
     }
 
     void EditBill_Clicked(System.Object sender, System.EventArgs e)
@@ -23,7 +23,7 @@ public partial class ProjectMenuView : ContentPage
 
     void DeleteProject_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ProjectMenuViewModel).DeleteProject();
+        (BindingContext as ProjectViewViewModel).DeleteProject();
     }
 
     void DeleteBill_Clicked(System.Object sender, System.EventArgs e)
@@ -37,7 +37,7 @@ public partial class ProjectMenuView : ContentPage
     void AddProject_Clicked(System.Object sender, System.EventArgs e)
     {
 
-        (BindingContext as ProjectMenuViewModel).AddProject();
+        (BindingContext as ProjectViewViewModel).AddProject();
     }
 
     void AddBill_Clicked(System.Object sender, System.EventArgs e)
@@ -66,7 +66,7 @@ public partial class ProjectMenuView : ContentPage
 
     void Cancel_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ProjectMenuViewModel).Cancel();
+        (BindingContext as ProjectViewViewModel).Cancel();
     }
 
     void Toolbar_ClientsClicked(System.Object sender, System.EventArgs e)

@@ -7,38 +7,38 @@ public partial class ClientMenuView : ContentPage
 	public ClientMenuView()
 	{
 		InitializeComponent();
-		BindingContext = new ClientMenuViewModel();
+		BindingContext = new ClientViewViewModel();
 	}
 
     void Search_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ClientMenuViewModel).Search();
+        (BindingContext as ClientViewViewModel).Search();
     }
 
     void Edit_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ClientMenuViewModel).Edit();
+        (BindingContext as ClientViewViewModel).Edit();
     }
 
     void Delete_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ClientMenuViewModel).Delete();
+        (BindingContext as ClientViewViewModel).Delete();
     }
 
     void Add_Clicked(System.Object sender, System.EventArgs e)
     {
 
-        (BindingContext as ClientMenuViewModel).Add();
+        (BindingContext as ClientViewViewModel).Add();
     }
 
     void Save_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ClientMenuViewModel).Save();
+        (BindingContext as ClientViewViewModel).Save();
     }
 
     void Cancel_Clicked(System.Object sender, System.EventArgs e)
     {
-        (BindingContext as ClientMenuViewModel).Cancel();
+        (BindingContext as ClientViewViewModel).Cancel();
     }
 
     void Toolbar_ClientsClicked(System.Object sender, System.EventArgs e)
