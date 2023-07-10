@@ -11,6 +11,11 @@ namespace COP4870_New002.Library.Models
 		{
 		}
 
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
+
         public object Clone()
         {
             return this.MemberwiseClone();

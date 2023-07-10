@@ -94,8 +94,8 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     
-                    <Label Grid.Row="0" Grid.Column="0" Text="Rate:" FontSize="Header" Margin="10,5,10,10"/>
-                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedEmployee.Rate}"
+                    <Label Grid.Row="0" Grid.Column="0" Text="Pay Rate:" FontSize="Header" Margin="10,5,10,10"/>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedEmployee.PayRate}"
                             FontSize="Header" Margin="0,5,10,10"/>
                     <Button Text="Edit"
                             Grid.Row="1"

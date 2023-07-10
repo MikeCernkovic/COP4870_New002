@@ -234,7 +234,7 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Label Grid.Column="0" VerticalTextAlignment="Center" Text="{Binding Name}" FontSize="Body" Margin="10,5,10,10"/>
                                                 <Label Grid.Column="1" VerticalTextAlignment="Center" Text="{Binding IsActive}" FontSize="Body" Margin="10,5,10,10"/>
-                                                <Label Grid.Column="2" VerticalTextAlignment="Center" Text="Go Too..." FontSize="Body" Margin="10,5,10,10"/>
+                                                <!--<Label Grid.Column="2" VerticalTextAlignment="Center" Text="Go Too..." FontSize="Body" Margin="10,5,10,10"/>-->
 
                                             </Grid>
                                         </ViewCell>
