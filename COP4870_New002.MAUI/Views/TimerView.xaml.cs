@@ -9,4 +9,6 @@ public partial class TimerView : ContentPage
         InitializeComponent();
         BindingContext = new TimerViewModel(projectId, parentWindow);
     }
+
+
 }

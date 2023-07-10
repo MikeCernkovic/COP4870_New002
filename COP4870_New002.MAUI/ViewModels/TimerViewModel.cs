@@ -5,25 +5,35 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Collections.ObjectModel;
 
 namespace COP4870_New002.MAUI.ViewModels
 {
-	public class TimerViewModel
+	public class TimerViewModel : INotifyPropertyChanged
 	{
-        public Project Project { get; set; }
-        public List<Project> Projects
+        private Bill bill { get; set; }
+
+        public string ProjectName
         {
             get
             {
-                return ProjectService.Current.Projects;
+                return ProjectService.Current.Get(bill.ProjectId).Name;
             }
         }
+        public List<Employee> Employees
+        {
+            get
+            {
+                return EmployeeService.Current.Employees;
+            }
+        }
+
+        public Employee SelectedEmployee { get; set; }
+        public string Narrative { get; set; }
 
         public string TimerDisplay
         {
@@ -35,14 +45,6 @@ namespace COP4870_New002.MAUI.ViewModels
                 time.Minutes,
                 time.Seconds);
                 return str;
-            }
-        }
-
-        public string ProjectDisplay
-        {
-            get
-            {
-                return Project.Name;
             }
         }
 
@@ -68,6 +70,21 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void ExecuteSubmit()
         {
+            if(SelectedEmployee != null)
+            {
+                Time newtime = new Time()
+                {
+                    Date = DateTime.Now,
+                    Narrative = Narrative,
+                    Hours = stopwatch.Elapsed.TotalHours,
+                    BillId = bill.Id,
+                    EmployeeId = SelectedEmployee.Id
+                };
+                TimeService.Current.Add(newtime);
+                bill = null;
+                SelectedEmployee = null;
+            }
+            
             Application.Current.CloseWindow(parentWindow);
         }
 
@@ -78,9 +95,9 @@ namespace COP4870_New002.MAUI.ViewModels
             SubmitCommand = new Command(ExecuteSubmit);
         }
 
-        public TimerViewModel(int projectId, Window parentWindow)
+        public TimerViewModel(int billId, Window parentWindow)
         {
-            Project = ProjectService.Current.Get(projectId) ?? new Project();
+            bill = BillService.Current.Get(billId);
             stopwatch = new Stopwatch();
             timer = Application.Current.Dispatcher.CreateTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 1);

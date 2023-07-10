@@ -15,9 +15,6 @@ namespace COP4870_New002.MAUI.ViewModels
 	{
         public Bill Model { get; set; }
 
-        //public ICommand AddCommand { get; private set; }
-        //public ICommand TimerCommand { get; private set; }
-
         private void ExecuteAdd()
         {
             BillService.Current.Add(Model);
@@ -29,32 +26,17 @@ namespace COP4870_New002.MAUI.ViewModels
             var window = new Window();
             window.MinimumWidth = 250;
             window.MaximumWidth = 250;
-            window.MinimumHeight = 350;
-            window.MaximumHeight = 350;
-
-            //Dispatcher.Dispatch(() =>
-            //{
-            //    window.MinimumWidth = 0;
-            //    window.MinimumHeight = 0;
-            //    window.MaximumWidth = double.PositiveInfinity;
-            //    window.MaximumHeight = double.PositiveInfinity;
-            //});
+            window.MinimumHeight = 400;
+            window.MaximumHeight = 400;
 
             var view = new TimerView(Model.Id, window);
             window.Page = view;
             Application.Current.OpenWindow(window);
         }
 
-        public void SetupCommands()
-        {
-            //AddCommand = new Command(ExecuteAdd);
-            //TimerCommand = new Command(ExecuteTimer);
-        }
-
         public BillViewModel()
         {
             Model = new Bill();
-            SetupCommands();
         }
 
         //public BillViewModel(int clientId)
@@ -67,7 +49,6 @@ namespace COP4870_New002.MAUI.ViewModels
         public BillViewModel(Bill model)
         {
             Model = model;
-            SetupCommands();
         }
     }
 }
