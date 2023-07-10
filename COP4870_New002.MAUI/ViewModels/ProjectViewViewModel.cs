@@ -15,7 +15,7 @@ namespace COP4870_New002.MAUI.ViewModels
             //DisplayTimeContent = true;
         }
 
-        public ProjectViewModel tempProject;
+        public Project AddEditProject { get; set; }
         private ProjectViewModel selectedproject;
         public ProjectViewModel SelectedProject
         {
@@ -64,6 +64,8 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
+        public Client SelectedClient { get; set; }
+
         private string query;
         public string Query
         {
@@ -90,7 +92,7 @@ namespace COP4870_New002.MAUI.ViewModels
                 displayprojectcontent = value;
                 //DisplayTimeContent = true;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged("DisplayProjectEdit");
+                NotifyPropertyChanged(nameof(DisplayProjectEdit));
             }
         }
 
@@ -124,6 +126,14 @@ namespace COP4870_New002.MAUI.ViewModels
         //        return !(displaytimecontent);
         //    }
         //}
+
+        public ObservableCollection<Client> Clients
+        {
+            get
+            {
+                return new ObservableCollection<Client>(ClientService.Current.Clients);
+            }
+        }
 
         public ObservableCollection<ProjectViewModel> Projects
         {
@@ -161,6 +171,7 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
+        //ADD
         public void AddBill()
         {
             if(SelectedProject != null)
@@ -177,47 +188,12 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        //public void EditTime()
-        //{
-        //    tempTime = SelectedTime;
-        //    SelectedTime = (Time)tempTime.Clone();
-        //    DisplayTimeContent = false;
-        //}
-
-        //public void SaveTime()
-        //{
-        //    SelectedTime.EmployeeId = SelectedEmployee.Id;
-        //    SelectedTime.ProjectId = SelectedProject.Id;
-
-        //    Time timeInList = TimeService.Current.Get(SelectedTime.Id);
-        //    if(timeInList == null)
-        //    {
-        //        TimeService.Current.Add(SelectedTime);
-        //    }
-        //    else
-        //    {
-        //        var idx = TimeService.Current.Times.IndexOf(tempTime);
-        //        TimeService.Current.Times[idx] = SelectedTime;
-        //    }
-
-        //    DisplayTimeContent = true;
-        //    NotifyPropertyChanged("Times");
-        //    NotifyPropertyChanged("SelectedTime");
-        //}
-
-        //public void DeleteTime()
-        //{
-        //    TimeService.Current.Delete(SelectedTime);
-        //    SelectedTime = null;
-        //    NotifyPropertyChanged("Times");
-        //}
-
-        //public void AddProject()
-        //{
-        //    //tempProject = SelectedProject;
-        //    //SelectedProject = new Project();
-        //    //DisplayProjectContent = false;
-        //}
+        public void AddProject()
+        {
+            AddEditProject = new Project();
+            DisplayProjectContent = false;
+            NotifyPropertyChanged(nameof(AddEditProject));
+        }
 
         public void Timer()
         {
@@ -227,38 +203,40 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
+        //EDIT
+        public void EditProject()
+        {
+            AddEditProject = SelectedProject.Model;
+            SelectedClient = ClientService.Current.Get(AddEditProject.ClientId);
+            DisplayProjectContent = false;
+            NotifyPropertyChanged(nameof(AddEditProject));
+        }
 
-        //public void EditProject()
-        //{
-        //    //tempProject = SelectedProject;
-        //    //SelectedProject = (Project)tempProject.Clone();
-        //    //DisplayProjectContent = false;
-        //}
+        //SAVE
+        public void SaveProject()
+        {
+            if(SelectedClient != null)
+            {
+                AddEditProject.ClientId = SelectedClient.Id;
+                if (ProjectService.Current.Get(AddEditProject.Id) == null)
+                {                
+                    ProjectService.Current.Add(AddEditProject);  
+                }
+                else
+                {
+                    int idx = ProjectService.Current.Projects.IndexOf(AddEditProject);
+                    ProjectService.Current.Projects[idx] = AddEditProject;
+                }
 
-        //public void SaveProject()
-        //{
-        //    //Set client Id
-        //    SelectedProject.ClientId = selectedclient.Id;
+                SelectedProject = new ProjectViewModel(AddEditProject);
+                AddEditProject = null;
+                SelectedClient = null;
+                DisplayProjectContent = true;
+                NotifyPropertyChanged(nameof(Projects));
+            }
+        }
 
-        //    Project projectInList = ProjectService.Current.Get(SelectedProject.Id);
-        //    if(projectInList == null)
-        //    {
-        //        ProjectService.Current.Add(SelectedProject);
-        //    }
-        //    else
-        //    {
-        //        var idx = ProjectService.Current.Projects.IndexOf(tempProject);
-        //        ProjectService.Current.Projects[idx] = SelectedProject;
-        //    }
-
-        //    //SelectedTime = null;
-        //    //DisplayTimeContent = true;
-        //    DisplayProjectContent = true;
-        //    NotifyPropertyChanged("Projects");
-        //    NotifyPropertyChanged("SelectedClient");
-        //    NotifyPropertyChanged("SelectedProject");
-        //}
-
+        //DELETE
         public void DeleteProject()
         {
             if(selectedproject != null)
@@ -290,7 +268,7 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void Cancel()
         {
-            SelectedProject = tempProject;
+            AddEditProject = null;
             //SelectedTime = tempTime;
 
             DisplayProjectContent = true;

@@ -12,7 +12,7 @@ public partial class ProjectMenuView : ContentPage
 
     void EditProject_Clicked(System.Object sender, System.EventArgs e)
     {
-        //(BindingContext as ProjectViewViewModel).EditProject();
+        (BindingContext as ProjectViewViewModel).EditProject();
     }
 
     void EditBill_Clicked(System.Object sender, System.EventArgs e)
@@ -40,7 +40,7 @@ public partial class ProjectMenuView : ContentPage
     void AddProject_Clicked(System.Object sender, System.EventArgs e)
     {
 
-        //(BindingContext as ProjectViewViewModel).AddProject();
+        (BindingContext as ProjectViewViewModel).AddProject();
     }
 
     void AddBill_Clicked(System.Object sender, System.EventArgs e)
@@ -58,7 +58,7 @@ public partial class ProjectMenuView : ContentPage
 
     void SaveProject_Clicked(System.Object sender, System.EventArgs e)
     {
-        //(BindingContext as ProjectMenuViewModel).SaveProject();
+        (BindingContext as ProjectViewViewModel).SaveProject();
     }
 
     //void SaveTime_Clicked(System.Object sender, System.EventArgs e)

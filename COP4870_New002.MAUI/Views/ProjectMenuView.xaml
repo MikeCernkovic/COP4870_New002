@@ -372,7 +372,7 @@
                 </Grid> 
             </Border>
 
-            <!--Edit Time--> 
+            <!--Edit Bill--> 
             <!--<Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1"
                     IsVisible="{Binding Path=DisplayTimeEdit}" IsEnabled="{Binding Path=DisplayTimeEdit}">                           
                 <Grid Padding="10">
@@ -381,87 +381,13 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0" Margin="0,0,10,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="1*"/>
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="0" HorizontalOptions="Fill">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="2*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <Label Grid.Column="0" Text="Date:" VerticalOptions="Center" Margin="10"/>
-                            <DatePicker Grid.Column="1" Date="{Binding Path=SelectedTime.Date}" VerticalOptions="Center"/>
-                            <Label Grid.Column="2" Text="Hours:" VerticalOptions="Center" Margin="10"/>
-                            <Entry Grid.Column="3" Text="{Binding Path=SelectedTime.Hours}" Placeholder="0" VerticalOptions="Center"/>
-                            <Label Grid.Column="4" Text="Employee:" VerticalOptions="Center" Margin="10"/>
-
-                            <Grid Grid.Column="5">
-                                <CollectionView ItemsSource="{Binding Path=Employees}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedEmployee, Mode=TwoWay}">
-                                    <CollectionView.ItemsLayout>
-                                        <GridItemsLayout Span="1" Orientation="Vertical"/>
-                                    </CollectionView.ItemsLayout>
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="1*"/>
-                                                    <ColumnDefinition Width="1*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Label Grid.Column="0" Text="{Binding Name}"/>
-                                                <Label Grid.Column="1" Text="{Binding Rate}"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                     </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </Grid>
-
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="1*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="Narrative:" VerticalOptions="Start" Margin="10"/>
-                            <Editor Grid.Column="1" Text="{Binding Path=SelectedTime.Narrative}" Placeholder="Enter Text" Margin="10"/>
-                        </Grid>
-                    </Grid>
-
-                    <Grid Grid.Column="1" VerticalOptions="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <Button Text="Save"
-                                Grid.Row="0"
-                                Clicked="SaveTime_Clicked"
-                                BackgroundColor="#171717"
-                                BorderColor="#d2d2d2"
-                                BorderWidth="1"
-                                TextColor="#d2d2d2"
-                                Margin="2"/>
-                        <Button Text="Cancel"
-                                Grid.Row="1"
-                                Clicked="Cancel_Clicked"
-                                BackgroundColor="#171717"
-                                BorderColor="#d2d2d2"
-                                BorderWidth="1"
-                                TextColor="#d2d2d2"
-                                Margin="2"/>
-                    </Grid>
+                    
                 </Grid> 
             </Border>-->   
         </Grid>
         
-        <!--Edit-->
-        <!--<Grid Grid.Column="1"
+        <!--Edit/Add Project-->
+        <Grid Grid.Column="1"
               IsVisible="{Binding Path=DisplayProjectEdit}" IsEnabled="{Binding Path=DisplayProjectEdit}">
             <Grid>
                 <Grid.RowDefinitions>
@@ -490,8 +416,8 @@
                     <Label Grid.Column="0" Grid.Row="4" Text="Close Date:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
                     <Label Grid.Column="0" Grid.Row="5" Text="Notes:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
 
-                    <Entry Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedProject.Name}"/>
-                    <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=SelectedProject.IsActive}" HorizontalOptions="Start"/>
+                    <Entry Grid.Column="1" Grid.Row="0" Text="{Binding Path=AddEditProject.Name, Mode=TwoWay}"/>
+                    <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=AddEditProject.IsActive, Mode=TwoWay}" HorizontalOptions="Start"/>
                     <Border Grid.Column="1" Grid.Row="2">
                         <CollectionView ItemsSource="{Binding Path=Clients}" SelectionMode="Single" SelectedItem="{Binding Path=SelectedClient, Mode=TwoWay}">
                             <CollectionView.ItemsLayout>
@@ -499,19 +425,19 @@
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Label FontSize="Medium" Text="{Binding Name}" Margin="0,20,0,0"/>
+                                    <Label FontSize="Medium" Text="{Binding Name}" VerticalTextAlignment="Center" Margin="0,20,0,0"/>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </Border>
                     <Border Grid.Column="1" Grid.Row="3">
-                        <DatePicker VerticalOptions="End" Date="{Binding Path=SelectedProject.OpenDate}"/>
+                        <DatePicker VerticalOptions="End" Date="{Binding Path=AddEditProject.OpenDate, Mode=TwoWay}"/>
                     </Border>
                     <Border Grid.Column="1" Grid.Row="4">
-                        <DatePicker VerticalOptions="End" Date="{Binding Path=SelectedProject.CloseDate}"/>
+                        <DatePicker VerticalOptions="End" Date="{Binding Path=AddEditProject.CloseDate, Mode=TwoWay}"/>
                     </Border>
                     <Border Grid.Column="1" Grid.Row="5">
-                        <Editor Text="{Binding Path=SelectedProject.Notes}" Placeholder="Enter Text"/>
+                        <Editor Text="{Binding Path=AddEditProject.Notes, Mode=TwoWay}" Placeholder="Enter Text"/>
                     </Border>
                     
                 </Grid>
@@ -538,7 +464,7 @@
                             Margin="1"/>
                 </Grid>
             </Grid>
-        </Grid>-->
+        </Grid>
 
     </Grid>
 </ContentPage>
