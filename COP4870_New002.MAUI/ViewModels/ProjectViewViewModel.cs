@@ -12,7 +12,7 @@ namespace COP4870_New002.MAUI.ViewModels
         public ProjectViewViewModel()
         {
             DisplayProjectContent = true;
-            //DisplayTimeContent = true;
+            DisplayBillContent = true;
         }
 
         public Project AddEditProject { get; set; }
@@ -33,6 +33,7 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
+        public Bill AddEditBill { get; set; }
         private BillViewModel selectedbill;
         public BillViewModel SelectedBill
         {
@@ -60,6 +61,7 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 selectedtime = value;
+                DisplayBillContent = true;
                 NotifyPropertyChanged();
             }
         }
@@ -104,28 +106,28 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        //private bool displaytimecontent;
-        //public bool DisplayTimeContent
-        //{
-        //    get
-        //    {
-        //        return displaytimecontent;
-        //    }
+        private bool displaybillcontent;
+        public bool DisplayBillContent
+        {
+            get
+            {
+                return displaybillcontent;
+            }
 
-        //    set
-        //    {
-        //        displaytimecontent = value;
-        //        NotifyPropertyChanged();
-        //        NotifyPropertyChanged("DisplayTimeEdit");
-        //    }
-        //}
-        //public bool DisplayTimeEdit
-        //{
-        //    get
-        //    {
-        //        return !(displaytimecontent);
-        //    }
-        //}
+            set
+            {
+                displaybillcontent = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(DisplayBillEdit));
+            }
+        }
+        public bool DisplayBillEdit
+        {
+            get
+            {
+                return !(displaybillcontent);
+            }
+        }
 
         public ObservableCollection<Client> Clients
         {
@@ -206,10 +208,23 @@ namespace COP4870_New002.MAUI.ViewModels
         //EDIT
         public void EditProject()
         {
-            AddEditProject = SelectedProject.Model;
-            SelectedClient = ClientService.Current.Get(AddEditProject.ClientId);
-            DisplayProjectContent = false;
-            NotifyPropertyChanged(nameof(AddEditProject));
+            if(SelectedProject != null)
+            {
+                AddEditProject = SelectedProject.Model;
+                SelectedClient = ClientService.Current.Get(AddEditProject.ClientId);
+                DisplayProjectContent = false;
+                NotifyPropertyChanged(nameof(AddEditProject));
+            }
+        }
+
+        public void EditBill()
+        {
+            if(SelectedBill != null)
+            {
+                AddEditBill = SelectedBill.Model;
+                DisplayBillContent = false;
+                NotifyPropertyChanged(nameof(AddEditBill));
+            }
         }
 
         //SAVE
@@ -234,6 +249,17 @@ namespace COP4870_New002.MAUI.ViewModels
                 DisplayProjectContent = true;
                 NotifyPropertyChanged(nameof(Projects));
             }
+        }
+
+        public void SaveBill()
+        {
+            int idx = BillService.Current.Bills.IndexOf(AddEditBill);
+            BillService.Current.Bills[idx] = AddEditBill;
+
+            SelectedBill = new BillViewModel(AddEditBill);
+            AddEditBill = null;
+            DisplayBillContent = true;
+            NotifyPropertyChanged(nameof(Bills));
         }
 
         //DELETE
@@ -269,10 +295,10 @@ namespace COP4870_New002.MAUI.ViewModels
         public void Cancel()
         {
             AddEditProject = null;
-            //SelectedTime = tempTime;
+            AddEditBill = null;
 
             DisplayProjectContent = true;
-            //DisplayTimeContent = true;
+            DisplayBillContent = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

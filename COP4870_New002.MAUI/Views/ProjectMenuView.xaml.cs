@@ -17,7 +17,7 @@ public partial class ProjectMenuView : ContentPage
 
     void EditBill_Clicked(System.Object sender, System.EventArgs e)
     {
-        //(BindingContext as ProjectMenuViewModel).EditTime();
+        (BindingContext as ProjectViewViewModel).EditBill();
     }
 
 
@@ -61,10 +61,10 @@ public partial class ProjectMenuView : ContentPage
         (BindingContext as ProjectViewViewModel).SaveProject();
     }
 
-    //void SaveTime_Clicked(System.Object sender, System.EventArgs e)
-    //{
-    //    (BindingContext as ProjectMenuViewModel).SaveTime();
-    //}
+    void SaveBill_Clicked(System.Object sender, System.EventArgs e)
+    {
+        (BindingContext as ProjectViewViewModel).SaveBill();
+    }
 
 
     void Cancel_Clicked(System.Object sender, System.EventArgs e)

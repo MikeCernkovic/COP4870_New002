@@ -284,7 +284,8 @@
             </Grid>
 
             <!--Display Bill--> 
-            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1" >                           
+            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1"
+                    IsVisible="{Binding Path=DisplayBillContent}" IsEnabled="{Binding Path=DisplayBillContent}">                           
                 <Grid Padding="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3.5*"/>
@@ -373,17 +374,56 @@
             </Border>
 
             <!--Edit Bill--> 
-            <!--<Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1"
-                    IsVisible="{Binding Path=DisplayTimeEdit}" IsEnabled="{Binding Path=DisplayTimeEdit}">                           
+            <Border Grid.Row="1" Stroke="#d2d2d2" StrokeThickness="1"
+                    IsVisible="{Binding Path=DisplayBillEdit}" IsEnabled="{Binding Path=DisplayBillEdit}">                           
                 <Grid Padding="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3.5*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
-                    
+                    <Grid Grid.Column="0" VerticalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Text="Due Date:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                        <Label Grid.Column="0" Grid.Row="1" Text="Status:" HorizontalOptions="End" VerticalOptions="Center" Margin="0,0,25,0" FontSize="Medium"/>
+                        
+                        <Border Grid.Column="1" Grid.Row="0">
+                            <DatePicker VerticalOptions="End" Date="{Binding Path=AddEditBill.DueDate, Mode=TwoWay}"/>
+                        </Border>
+                        <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=AddEditBill.IsActive, Mode=TwoWay}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1" VerticalOptions="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Button Text="Save"
+                                Grid.Row="0"
+                                Clicked="SaveBill_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="#d2d2d2"
+                                Margin="2"/>
+                        <Button Text="Cancel"
+                                Grid.Row="1"
+                                Clicked="Cancel_Clicked"
+                                BackgroundColor="#171717"
+                                BorderColor="#d2d2d2"
+                                BorderWidth="1"
+                                TextColor="Red"
+                                Margin="2"/>
+                    </Grid>
                 </Grid> 
-            </Border>-->   
+            </Border>   
         </Grid>
         
         <!--Edit/Add Project-->
