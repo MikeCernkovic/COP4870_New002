@@ -1,5 +1,8 @@
 ﻿using System;
+using COP4870_New002.Library.DTO;
 using COP4870_New002.Library.Models;
+using Newtonsoft.Json;
+using PP.Library.Utilities;
 
 namespace COP4870_New002.Library.Services
 {
@@ -27,48 +30,38 @@ namespace COP4870_New002.Library.Services
         private List<Time> times;
         private TimeService()
         {
-            times = new List<Time>
-            {
-                new Time{Id=1, BillId = 2, Hours=0, EmployeeId=2, Narrative="Brushed teeth"},
-                new Time{Id=2, BillId = 2, Hours=0, EmployeeId=5, Narrative="Finished Homework"},
-                new Time{Id=3, BillId = 2, Hours=0, EmployeeId=2, Narrative="Walked the dog"},
-                new Time{Id=4, BillId = 1, Hours=0, EmployeeId=3, Narrative="Got Milk"}
-            };
+            //UpdateTimes();
         }
 
-        public List<Time> Times
-        {
-            get { return times; }
-        }
+        //public List<Time> Times
+        //{
+        //    get { return times; }
+        //}
 
-        public Time? Get(int id)
-        {
-            return Times.FirstOrDefault(t => t.Id == id);
-        }
+        //public Time? Get(int id)
+        //{
+        //    var response = new WebRequestHandler()
+        //            .Get($"/Time/{id}")
+        //            .Result;
 
-        public void Add(Time? time)
+        //    return JsonConvert.DeserializeObject
+        //        <Time>(response) ?? new Time();
+        //}
+
+        public void Add(Time? t)
         {
-            if (time != null)
+            if (t != null)
             {
                 //update bill amount
-                time.Id = times.Last().Id + 1;
-                times.Add(time);
+                var response = new WebRequestHandler()
+                    .Post("/Time/Add", t).Result;
             }
         }
 
-        public void Delete(int id)
+        public void Delete(Time t)
         {
-            var timeToRemove = Get(id);
-            if (timeToRemove != null)
-            {
-                //update bill amount
-                times.Remove(timeToRemove);
-            }
-        }
-
-        public void Delete(Time s)
-        {
-            Delete(s.Id);
+            var response = new WebRequestHandler()
+                .Delete($"/Time/Delete/{t.Id}").Result;
         }
     }
 }

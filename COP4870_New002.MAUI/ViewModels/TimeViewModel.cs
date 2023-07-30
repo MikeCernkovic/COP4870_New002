@@ -25,7 +25,7 @@ namespace COP4870_New002.MAUI.ViewModels
 
         private void ExecuteDelete()
         {
-            TimeService.Current.Delete(Model.Id);
+            TimeService.Current.Delete(Model);
             //Shell.Current.GoToAsync($"//ClientDetail?clientId={Model.ClientId}");
         }
 

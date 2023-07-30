@@ -87,19 +87,19 @@ namespace COP4870_New002.MAUI.ViewModels
         {
             get
             {   //get all times whos projectId = selectedproject.id
-                if (selectedproject != null)
-                {
-                    var time_list = new ObservableCollection<Time>(TimeService.Current.Times.Where(s => s.EmployeeId == selectedproject.Id));
-                    foreach (Time time_obj in time_list)
-                    {
-                        if (time_obj.Narrative.Length > 55)
-                        {
-                            time_obj.Narrative = time_obj.Narrative.Substring(0, 50);
-                            time_obj.Narrative += "...";
-                        }
-                    }
-                    return time_list;
-                }
+                //if (selectedproject != null)
+                //{
+                //    var time_list = new ObservableCollection<Time>(TimeService.Current.Times.Where(s => s.EmployeeId == selectedproject.Id));
+                //    foreach (Time time_obj in time_list)
+                //    {
+                //        if (time_obj.Narrative.Length > 55)
+                //        {
+                //            time_obj.Narrative = time_obj.Narrative.Substring(0, 50);
+                //            time_obj.Narrative += "...";
+                //        }
+                //    }
+                //    return time_list;
+                //}
 
                 return new ObservableCollection<Time>();
             }
@@ -148,10 +148,10 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void Delete()
         {
-            foreach (Time tm in Times)
-            {
-                TimeService.Current.Times.Remove(tm);
-            }
+            //foreach (Time tm in Times)
+            //{
+            //    TimeService.Current.Times.Remove(tm);
+            //}
             EmployeeService.Current.Delete(SelectedEmployee);
             SelectedEmployee = null;
             NotifyPropertyChanged("Employees");

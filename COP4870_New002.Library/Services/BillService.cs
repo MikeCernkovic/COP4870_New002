@@ -28,27 +28,27 @@ namespace COP4870_New002.Library.Services
             }
         }
 
-        private List<Bill> bills;
+        //private List<Bill> bills;
         private BillService()
         {
-            UpdateBills();
+            //UpdateBills();
         }
 
-        public List<Bill> Bills
-        {
-            get { return bills ?? new List<Bill>(); }
-        }
+        //public List<Bill> Bills
+        //{
+        //    get { return bills ?? new List<Bill>(); }
+        //}
 
-        public void UpdateBills()
-        {
-            var response = new WebRequestHandler()
-                    .Get("/Bill")
-                    .Result;
+        //public void UpdateBills()
+        //{
+        //    var response = new WebRequestHandler()
+        //            .Get("/Bill")
+        //            .Result;
 
-            bills = JsonConvert
-                .DeserializeObject<List<Bill>>(response)
-                ?? new List<Bill>();
-        }
+        //    bills = JsonConvert
+        //        .DeserializeObject<List<Bill>>(response)
+        //        ?? new List<Bill>();
+        //}
 
         public BillDTO? Get(int id)
         {
@@ -67,7 +67,7 @@ namespace COP4870_New002.Library.Services
                 var response = new WebRequestHandler()
                     .Post("/Bill/Add", p).Result;
 
-                UpdateBills();
+                //UpdateBills();
             }
         }
 
@@ -76,7 +76,7 @@ namespace COP4870_New002.Library.Services
             var response = new WebRequestHandler()
                 .Delete($"/Bill/Delete/{s.Id}").Result;
 
-            UpdateBills();
+            //UpdateBills();
         }
     }
 }
