@@ -130,7 +130,7 @@
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Text="{Binding Path=SelectedClient.Name}" FontSize="Title" FontAttributes="Bold" />
+                    <Label Grid.Row="0" Text="{Binding Path=MainClient.client.Name}" FontSize="Title" FontAttributes="Bold" />
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -142,7 +142,7 @@
                         </Grid.ColumnDefinitions>
                     
                         <Label Grid.Row="0" Grid.Column="0" Text="Active:" FontSize="Header"/>
-                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedClient.IsActive}" FontSize="Header" TextColor="LawnGreen"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=MainClient.client.IsActive}" FontSize="Header" TextColor="LawnGreen"/>
                         <Button Text="Edit"
                                 Grid.Row="1"
                                 Grid.Column="0"
@@ -181,9 +181,9 @@
                     <Label Grid.Row="1" Grid.Column="0" Text="Close Date:" FontSize="Header"/>
                     <Label Grid.Row="2" Grid.Column="0" Text="Notes:" FontSize="Header"/>
 
-                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=SelectedClient.OpenDate}" FontSize="Header"/>
-                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Path=SelectedClient.CloseDate}" FontSize="Header"/>
-                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding Path=SelectedClient.Notes}" FontSize="Header"/>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=MainClient.client.OpenDate}" FontSize="Header"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Path=MainClient.client.CloseDate}" FontSize="Header"/>
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding Path=MainClient.client.Notes}" FontSize="Header"/>
                 </Grid>
             </Grid>
 
@@ -221,7 +221,7 @@
                                 <!--<Label Grid.Column="2" Text="xxx"/>-->
                         
                             </Grid>
-                            <ListView Grid.Row="1" ItemsSource="{Binding Path=Projects}"
+                            <ListView Grid.Row="1" ItemsSource="{Binding Path=MainClient.Projects}"
                                     SelectedItem="{Binding Path=SelectedProject, Mode=TwoWay}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -268,7 +268,7 @@
                                 <Label Grid.Column="2" Text="Amount" FontAttributes="Bold" FontSize="Large" Margin="10"/>
                         
                             </Grid>
-                            <ListView Grid.Row="1" ItemsSource="{Binding Path=Bills}"
+                            <ListView Grid.Row="1" ItemsSource="{Binding Path=MainClient.Bills}"
                                     SelectedItem="{Binding Path=SelectedBill, Mode=TwoWay}">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>

@@ -4,6 +4,7 @@ using COP4870_New002.Library.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using COP4870_New002.Library.DTO;
 //using COP4870_New002.Library;
 
 namespace COP4870_New002.MAUI.ViewModels
@@ -27,9 +28,9 @@ namespace COP4870_New002.MAUI.ViewModels
                 tempClient = value;
                 DisplayContent = false;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(SelectedClient));
             }
         }
-
 
         private Client selectedclient;
         public Client SelectedClient
@@ -43,14 +44,26 @@ namespace COP4870_New002.MAUI.ViewModels
                 selectedclient = value;
                 DisplayContent = true;
                 NotifyPropertyChanged();
-                //NotifyPropertyChanged(nameof(DisplayContent));
+                NotifyPropertyChanged(nameof(MainClient));
                 NotifyPropertyChanged(nameof(DisplayProjects));
                 NotifyPropertyChanged(nameof(DisplayBills));
             }
         }
 
-        private Client selectedproject;
-        public Client SelectedProject
+        public ClientDTO MainClient {
+            get
+            {
+                var mainclient = new ClientDTO();
+                if (SelectedClient != null)
+                {
+                    mainclient = ClientService.Current.Get(SelectedClient.Id);
+                }
+                return mainclient;
+            }
+        }
+
+        private Project selectedproject;
+        public Project SelectedProject
         {
             get
             {
@@ -79,7 +92,7 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        private string query;
+        private string query = string.Empty;
         public string Query
         {
             get
@@ -89,7 +102,7 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 query = value;
-                NotifyPropertyChanged("Clients");
+                NotifyPropertyChanged(nameof(Clients));
             }
         }
 
@@ -105,7 +118,7 @@ namespace COP4870_New002.MAUI.ViewModels
             {
                 display = value;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged("DisplayEdit");
+                NotifyPropertyChanged(nameof(DisplayEdit));
             }
         }
         public bool DisplayEdit
@@ -146,8 +159,6 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-
-
         public ObservableCollection<Client> Clients
         {
             get
@@ -160,35 +171,9 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        public ObservableCollection<Project> Projects
-        {
-            get
-            {   //get all projects whos clientId = selectedclient.id
-                if (selectedclient != null)
-                {
-                    return new ObservableCollection<Project>(ProjectService.Current.Projects.Where(s => s.ClientId == selectedclient.Id));
-                }
-
-                return new ObservableCollection<Project>();
-            }
-        }
-
-        public ObservableCollection<Bill> Bills
-        {
-            get
-            {   //get all projects whos clientId = selectedclient.id
-                if (selectedclient != null)
-                {
-                    return new ObservableCollection<Bill>(BillService.Current.Bills.Where(b => b.ClientId == selectedclient.Id));
-                }
-
-                return new ObservableCollection<Bill>();
-            }
-        }
-
         public void Search()
         {
-            NotifyPropertyChanged("Clients");
+            NotifyPropertyChanged(nameof(Clients));
         }
 
         //Modify
@@ -200,47 +185,30 @@ namespace COP4870_New002.MAUI.ViewModels
         public void Edit()
         {
             TempClient = (Client)SelectedClient.Clone(); //Make a copy of selected cleint
-            NotifyPropertyChanged("Clients");
+            //NotifyPropertyChanged("Clients");
         }
 
         public void Save()
         {
-            //Client clientInList = Clients.SingleOrDefault(s => s.Id == TempClient.Id);
-            Client clientInList = ClientService.Current.Get(TempClient.Id);
-
-            //if client doesn't exist add to list
-            if (clientInList == null)
-            {
-                ClientService.Current.Add(TempClient);
-            }
-            else
-            {
-                var idx = Clients.IndexOf(clientInList);
-                ClientService.Current.Clients[idx] = TempClient;
-            }
+            ClientService.Current.Add(TempClient);
 
             SelectedClient = TempClient;
+            //TempClient = null;
             MenuCategory = string.Empty;
-            NotifyPropertyChanged("Clients");
+            NotifyPropertyChanged(nameof(Clients));
         }
 
         public void Cancel()
         {
-            //TempClient = null;
+            TempClient = null;
             DisplayContent = true;
         }
 
         public void Delete()
         {
-            foreach (Project proj in Projects)
-            {
-                proj.ClientId = 0;
-            }
             ClientService.Current.Delete(SelectedClient);
             SelectedClient = null;
-            NotifyPropertyChanged("Clients");
-            NotifyPropertyChanged(nameof(DisplayProjects));
-            NotifyPropertyChanged(nameof(DisplayBills));
+            NotifyPropertyChanged(nameof(Clients));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

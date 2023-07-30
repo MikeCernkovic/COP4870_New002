@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "YA1RI7UmqXsdMnSiVqI0CSNbOFTvcfefBnf3IOcwPwnufhSNJRZOfa9wLPiSoWA1Vg9rXu0T8GiHh44Q3aHCCA==",
+  "dgSpecHash": "9wmEeHQ62BKRZnIQtQx3YY5RIg8yFrTXqwNWCOZsq2icjHO6S/UMsUOP/tQK5yNBThT4dt6IkMSAAVOnuDTOoQ==",
   "success": true,
   "projectFilePath": "/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.Library/COP4870_New002.Library.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/michaelcernkovic/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

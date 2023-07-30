@@ -1,4 +1,5 @@
-﻿using COP4870_New002.Library.Models;
+﻿using COP4870_New002.Library.DTO;
+using COP4870_New002.Library.Models;
 using COP4870_New002.Library.Services;
 using COP4870_New002.MAUI.Views;
 using System;
@@ -13,11 +14,11 @@ namespace COP4870_New002.MAUI.ViewModels
 {
 	public class BillViewModel
 	{
-        public Bill Model { get; set; }
+        public BillDTO Model { get; set; }
 
         private void ExecuteAdd()
         {
-            BillService.Current.Add(Model);
+            //BillService.Current.Add(Model);
             //Shell.Current.GoToAsync($"//ClientDetail?clientId={Model.ClientId}");
         }
 
@@ -29,14 +30,14 @@ namespace COP4870_New002.MAUI.ViewModels
             window.MinimumHeight = 400;
             window.MaximumHeight = 400;
 
-            var view = new TimerView(Model.Id, window);
+            var view = new TimerView(Model.bill.Id, window);
             window.Page = view;
             Application.Current.OpenWindow(window);
         }
 
         public BillViewModel()
         {
-            Model = new Bill();
+            Model = new BillDTO();
         }
 
         //public BillViewModel(int clientId)
@@ -46,7 +47,7 @@ namespace COP4870_New002.MAUI.ViewModels
         //    SetupCommands();
         //}
 
-        public BillViewModel(Bill model)
+        public BillViewModel(BillDTO model)
         {
             Model = model;
         }

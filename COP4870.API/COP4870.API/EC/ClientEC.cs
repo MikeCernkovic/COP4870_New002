@@ -36,15 +36,28 @@ namespace COP4870.API.EC
             return new ClientDTO(cli, projs, bills);
         }
 
-        //public ClientDTO AddOrUpdate(ClientDTO dto)
-        //{
+        public void AddOrUpdate(Client c)
+        {
+            Filebase.Current.AddOrUpdate(c);
+        }
 
-        //}
+        public void Delete(int id)
+        {
+            var pl = Filebase.Current.Projects.Where(b => b.ClientId == id).ToList();
+            foreach (Project proj in pl)
+            {
+                proj.ClientId = 0;
+                Filebase.Current.AddOrUpdate(proj);
+            }
 
-        //public ClientDTO? Delete(int id)
-        //{
-
-        //}
+            var bl = Filebase.Current.Bills.Where(b => b.ClientId == id).ToList();
+            foreach (Bill bill in bl)
+            {
+                bill.ClientId = 0;
+                Filebase.Current.AddOrUpdate(bill);
+            }
+            Filebase.Current.DeleteClient(id.ToString());
+        }
     }
 }
 

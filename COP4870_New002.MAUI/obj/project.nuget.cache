@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lRsJ0uK9vmaJmlPscCP3p+N25RrRBhBDl2JHPy6AMra1ijahnt4hMXsSbwW/tN7fZZpMYbqvuzniBhyj97c+Fg==",
+  "dgSpecHash": "iA2eIBkoUEzwpH5gL5y6S67rvd51169DYA21wUuVinq2w/0PujxhcHA5g8pQogCT4xCe7ltBKV6e/AFxrd3Upg==",
   "success": true,
   "projectFilePath": "/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/COP4870_New002.MAUI.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "/Users/michaelcernkovic/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/Users/michaelcernkovic/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "/Users/michaelcernkovic/.nuget/packages/microsoft.maui.graphics/7.0.86/microsoft.maui.graphics.7.0.86.nupkg.sha512",
+    "/Users/michaelcernkovic/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/michaelcernkovic/.nuget/packages/xamarin.android.glide/4.13.2.2/xamarin.android.glide.4.13.2.2.nupkg.sha512",
     "/Users/michaelcernkovic/.nuget/packages/xamarin.android.glide.annotations/4.13.2.2/xamarin.android.glide.annotations.4.13.2.2.nupkg.sha512",
     "/Users/michaelcernkovic/.nuget/packages/xamarin.android.glide.disklrucache/4.13.2.2/xamarin.android.glide.disklrucache.4.13.2.2.nupkg.sha512",

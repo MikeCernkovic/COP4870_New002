@@ -24,7 +24,7 @@ namespace COP4870.API.Controllers
             return new ClientEC().Search();
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public ClientDTO? GetId(int id)
         {
             return new ClientEC().Get(id);
@@ -36,17 +36,17 @@ namespace COP4870.API.Controllers
         //    return new ClientEC().Search(query.Query);
         //}
 
-        //[HttpDelete("Delete/{id}")]
-        //public ClientDTO? Delete(int id)
-        //{
-        //    return new ClientEC().Delete(id);
-        //}
+        [HttpDelete("Delete/{id}")]
+        public void Delete(int id)
+        {
+            new ClientEC().Delete(id);
+        }
 
-        //[HttpPost]
-        //public ClientDTO AddOrUpdate([FromBody] ClientDTO client)
-        //{
-        //    return new ClientEC().AddOrUpdate(client);
-        //}
+        [HttpPost("Add")]
+        public void AddOrUpdate([FromBody] Client c)
+        {
+            new ClientEC().AddOrUpdate(c);
+        }
     }
 }
 

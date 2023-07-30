@@ -9,6 +9,7 @@
 /Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../COP4870_New002.MAUI.app/Contents/MonoBundle/Microsoft.Extensions.Options.dll
 /Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../COP4870_New002.MAUI.app/Contents/MonoBundle/Microsoft.Extensions.Primitives.dll
 /Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../COP4870_New002.MAUI.app/Contents/MonoBundle/Microsoft.Maui.Graphics.dll
+/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../COP4870_New002.MAUI.app/Contents/MonoBundle/Newtonsoft.Json.dll
 /Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../COP4870_New002.MAUI.app/Contents/MonoBundle/COP4870_New002.dll
 /Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../COP4870_New002.MAUI.app/Contents/MonoBundle/COP4870_New002.Library.dll
 /Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.MAUI/bin/Debug/net7.0-maccatalyst/maccatalyst-x64/publish/../COP4870_New002.MAUI.app/Contents/MonoBundle/COP4870_New002.MAUI.dll

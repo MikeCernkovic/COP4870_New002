@@ -1,4 +1,7 @@
-﻿using COP4870_New002.Library.Models;
+﻿using COP4870_New002.Library.DTO;
+using COP4870_New002.Library.Models;
+using Newtonsoft.Json;
+using PP.Library.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,53 +35,68 @@ namespace COP4870_New002.Library.Services
         private List<Client> clients;
         private ClientService()
         {
-            clients = new List<Client>
-            {
-                new Client { Id = 1, Name = "Elon Musk", IsActive = true,       OpenDate = new DateTime(2019,05,09,0,0,0), Notes = "Super rich Billionaire."},
-                new Client { Id = 2, Name = "John Paul", IsActive = false,      OpenDate = new DateTime(2020,03,10,9,0,0), Notes = "A pirate maybe"},
-                new Client { Id = 3, Name = "Jack Sparrow", IsActive = true,    OpenDate = new DateTime(2015,06,22,1,0,0), Notes = "The Real pirate"},
-                new Client { Id = 4, Name = "DOD", IsActive = true,             OpenDate = new DateTime(2012,09,06,2,0,0), Notes = "Government Department of Defense."}
-            };
+            UpdateClients();
         }
 
         public List<Client> Clients
         {
-            get { return clients; }
+            get { return clients ?? new List<Client>(); }
+        }
+
+        public void UpdateClients()
+        {
+            var response = new WebRequestHandler()
+                    .Get("/Client")
+                    .Result;
+
+            clients = JsonConvert
+                .DeserializeObject<List<Client>>(response)
+                ?? new List<Client>();
         }
 
         public List<Client> SearchClients(string query)
         {
             return Clients.Where(s => s.Name.ToUpper()
-            .Contains(query.ToUpper()))
-            .ToList();
+                        .Contains(query.ToUpper()))
+                        .ToList();
         }
 
-        public Client? Get(int id)
+        public string GetName(int id)
         {
-            return Clients.FirstOrDefault(e => e.Id == id);
-        }
-
-        public void Add(Client? client)
-        {
-            if (client != null)
+            var cli = Clients.FirstOrDefault(c => c.Id == id);
+            if(cli == null)
             {
-                client.Id = clients.Last().Id + 1;
-                clients.Add(client);
+                return string.Empty;
             }
+            return cli.Name;
         }
 
-        public void Delete(int id)
+        public ClientDTO? Get(int id)
         {
-            var clientToRemove = Get(id);
-            if (clientToRemove != null)
+            var response = new WebRequestHandler()
+                    .Get($"/Client/{id}")
+                    .Result;
+
+            return JsonConvert.DeserializeObject
+                <ClientDTO>(response) ?? new ClientDTO();
+        }
+
+        public void Add(Client? c)
+        {
+            if (c != null && !Clients.Contains(c))
             {
-                Clients.Remove(clientToRemove);
+                var response = new WebRequestHandler()
+                    .Post("/Client/Add", c).Result;
+                UpdateClients();
             }
         }
 
         public void Delete(Client s)
         {
-            Delete(s.Id);
+            var response = new WebRequestHandler()
+                .Delete($"/Client/Delete/{s.Id}").Result;
+
+            Clients.Remove(s);
         }
     }
 }

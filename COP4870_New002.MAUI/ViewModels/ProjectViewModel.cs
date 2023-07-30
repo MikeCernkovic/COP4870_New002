@@ -13,13 +13,13 @@ namespace COP4870_New002.MAUI.ViewModels
         {
             get
             {
-                return ClientService.Current.Get(Model.ClientId).Name;
+                return ClientService.Current.GetName(Model.ClientId);
             }
         }
 
         private void ExecuteAdd()
         {
-            ProjectService.Current.Add(Model);
+            //ProjectService.Current.Add(Model);
         }
 
         public ProjectViewModel()

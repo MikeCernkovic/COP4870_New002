@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		TKY2bjFBiTjHEdOhXp25PrippiY=
+		0z5bAwwBv1QXFc1RnjSV79sbWK8=
 		</data>
 		<key>Resources/MauiInfo.plist</key>
 		<data>
@@ -51,28 +51,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			o9tc7ULTy/JYunfW1kB2bG2GNXm9dXwOWktGY8NQkHg=
+			tobQ7cZWnLu+PDk2MzjV9hW9TNCIY2VPIeX9OUAlmyc=
 			</data>
 		</dict>
 		<key>MonoBundle/COP4870_New002.Library.pdb</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Rmp5l2IphS2EaILmzkzVRKCdCEFCs/YXEvzHslmbFcQ=
+			bkAbaQNSL3oAW+u6y8/NdmjDuNuVENln6/qQn3ciKkQ=
 			</data>
 		</dict>
 		<key>MonoBundle/COP4870_New002.MAUI.dll</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+c23jFeovdJAx4XpBmAQ18zlje3aSDkCYokluG9p5c0=
+			JCHSwUE6SARIxMI1B64tqVyBZ2lk2A+58anYhE3YzCY=
 			</data>
 		</dict>
 		<key>MonoBundle/COP4870_New002.MAUI.pdb</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			00JkIXPhW3hjSx+MU4wGmeEzUGCkT+puUm8/+ebtWo8=
+			pwuG+NfnSjEOLE+xxE8APg0Qt+X7VcwpA/ilWnvhdIE=
 			</data>
 		</dict>
 		<key>MonoBundle/COP4870_New002.dll</key>
@@ -234,6 +234,13 @@
 			<key>hash2</key>
 			<data>
 			RMfw5ap9fJL87Lyp3aTFUo0KmdFAuD3ECPkcVOz1A24=
+			</data>
+		</dict>
+		<key>MonoBundle/Newtonsoft.Json.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			IsZJ91/OW+fHzNqIgEc7Y072ns8z9dGritiSyvR9Wgc=
 			</data>
 		</dict>
 		<key>MonoBundle/System.AppContext.dll</key>
@@ -1451,7 +1458,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			utv9I8ATBhNvq3zNew23TdKkebsN5vhMeUSukGLhQvY=
+			KvKpH3OpUSrImxay5BDonT0E8xOUpF4QFSitnYVrlq0=
 			</data>
 		</dict>
 		<key>Resources/MauiInfo.plist</key>

@@ -10,18 +10,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using COP4870_New002.Library.DTO;
 
 namespace COP4870_New002.MAUI.ViewModels
 {
 	public class TimerViewModel : INotifyPropertyChanged
 	{
-        private Bill bill { get; set; }
+        private BillDTO bill { get; set; }
 
         public string ProjectName
         {
             get
             {
-                return ProjectService.Current.Get(bill.ProjectId).Name;
+                return ProjectService.Current
+                    .Get(bill.bill.ProjectId).project.Name;
             }
         }
         public List<Employee> Employees
@@ -77,7 +79,7 @@ namespace COP4870_New002.MAUI.ViewModels
                     Date = DateTime.Now,
                     Narrative = Narrative,
                     Hours = stopwatch.Elapsed.TotalHours,
-                    BillId = bill.Id,
+                    BillId = bill.bill.Id,
                     EmployeeId = SelectedEmployee.Id
                 };
                 TimeService.Current.Add(newtime);

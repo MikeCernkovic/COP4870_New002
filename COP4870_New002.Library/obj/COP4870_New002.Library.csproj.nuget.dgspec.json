@@ -23,6 +23,7 @@
           "net7.0"
         ],
         "sources": {
+          "/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.Library/bin/Debug/net7.0": {},
           "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -45,6 +46,12 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -84,6 +91,7 @@
           "net7.0"
         ],
         "sources": {
+          "/Users/michaelcernkovic/Projects/COP4870_New002/COP4870_New002.Library/bin/Debug/net7.0": {},
           "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },

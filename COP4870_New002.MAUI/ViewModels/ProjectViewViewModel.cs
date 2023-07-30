@@ -4,6 +4,7 @@ using COP4870_New002.Library.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using COP4870_New002.Library.DTO;
 
 namespace COP4870_New002.MAUI.ViewModels
 {
@@ -16,8 +17,8 @@ namespace COP4870_New002.MAUI.ViewModels
         }
 
         public Project AddEditProject { get; set; }
-        private ProjectViewModel selectedproject;
-        public ProjectViewModel SelectedProject
+        private Project selectedproject;
+        public Project SelectedProject
         {
             get
             {
@@ -26,16 +27,30 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 selectedproject = value;
+                DisplayProjectContent = true;
                 SelectedBill = null;
                 NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(Bills));
+                NotifyPropertyChanged(nameof(MainProject));
                 NotifyPropertyChanged(nameof(Times));
             }
         }
 
+        public ProjectDTO MainProject
+        {
+            get
+            {
+                var mainproject = new ProjectDTO();
+                if (SelectedProject != null)
+                {
+                    mainproject = ProjectService.Current.Get(SelectedProject.Id);
+                }
+                return mainproject;
+            }
+        }
+
         public Bill AddEditBill { get; set; }
-        private BillViewModel selectedbill;
-        public BillViewModel SelectedBill
+        private Bill selectedbill;
+        public Bill SelectedBill
         {
             get
             {
@@ -46,11 +61,25 @@ namespace COP4870_New002.MAUI.ViewModels
                 selectedbill = value;
                 SelectedTime = null;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(MainBill));
                 NotifyPropertyChanged(nameof(Times));
             }
         }
 
-        public TimeViewModel tempTime;
+        public BillViewModel MainBill
+        {
+            get
+            {
+                var mainbill = new BillDTO();
+                if (SelectedBill != null)
+                {
+                    mainbill = BillService.Current.Get(SelectedBill.Id);
+                }
+                return new BillViewModel(mainbill);
+            }
+        }
+
+        //public TimeViewModel tempTime;
         private TimeViewModel selectedtime;
         public TimeViewModel SelectedTime
         {
@@ -78,7 +107,7 @@ namespace COP4870_New002.MAUI.ViewModels
             set
             {
                 query = value;
-                NotifyPropertyChanged("Projects");
+                NotifyPropertyChanged(nameof(Projects));
             }
         }
 
@@ -121,6 +150,7 @@ namespace COP4870_New002.MAUI.ViewModels
                 NotifyPropertyChanged(nameof(DisplayBillEdit));
             }
         }
+
         public bool DisplayBillEdit
         {
             get
@@ -137,27 +167,15 @@ namespace COP4870_New002.MAUI.ViewModels
             }
         }
 
-        public ObservableCollection<ProjectViewModel> Projects
+        public ObservableCollection<Project> Projects
         {
             get
             {
                 if (string.IsNullOrEmpty(Query))
                 {
-                    return new ObservableCollection<ProjectViewModel>(ProjectService.Current.Projects.Select(p => new ProjectViewModel(p)));
+                    return new ObservableCollection<Project>(ProjectService.Current.Projects);
                 }
-                return new ObservableCollection<ProjectViewModel>(ProjectService.Current.SearchProjects(query).Select(p => new ProjectViewModel(p)));
-            }
-        }
-
-        public ObservableCollection<BillViewModel> Bills
-        {
-            get
-            {
-                if (selectedproject != null)
-                {
-                    return new ObservableCollection<BillViewModel>(BillService.Current.Bills.Where(b => b.ProjectId == selectedproject.Model.Id).Select(m => new BillViewModel(m)));
-                }
-                return new ObservableCollection<BillViewModel>();
+                return new ObservableCollection<Project>(ProjectService.Current.SearchProjects(Query));
             }
         }
 
@@ -167,7 +185,8 @@ namespace COP4870_New002.MAUI.ViewModels
             {
                 if (selectedbill != null)
                 {
-                    return new ObservableCollection<TimeViewModel>(TimeService.Current.Times.Where(t => t.BillId == selectedbill.Model.Id).Select(m => new TimeViewModel(m)));
+                    return new ObservableCollection<TimeViewModel>(
+                        MainBill.Model.Times.Select(t => new TimeViewModel(t)));
                 }
                 return new ObservableCollection<TimeViewModel>();
             }
@@ -176,17 +195,17 @@ namespace COP4870_New002.MAUI.ViewModels
         //ADD
         public void AddBill()
         {
-            if(SelectedProject != null)
+            if (SelectedProject != null)
             {
                 var newbill = new Bill()
                 {
                     TotalAmount = 0,
-                    ProjectId = SelectedProject.Model.Id,
-                    ClientId = SelectedProject.Model.ClientId,
+                    ProjectId = SelectedProject.Id,
+                    ClientId = SelectedProject.ClientId,
                     IsActive = true
                 };
                 BillService.Current.Add(newbill);
-                NotifyPropertyChanged(nameof(Bills));
+                NotifyPropertyChanged(nameof(MainProject));
             }
         }
 
@@ -199,9 +218,9 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void Timer()
         {
-            if(selectedbill != null)
+            if (selectedbill != null)
             {
-                SelectedBill.ExecuteTimer();
+                MainBill.ExecuteTimer();
             }
         }
 
@@ -210,8 +229,10 @@ namespace COP4870_New002.MAUI.ViewModels
         {
             if(SelectedProject != null)
             {
-                AddEditProject = SelectedProject.Model;
-                SelectedClient = ClientService.Current.Get(AddEditProject.ClientId);
+                AddEditProject = SelectedProject;
+                SelectedClient = ClientService.Current.Clients
+                    .FirstOrDefault(c => c.Id == AddEditProject.ClientId);
+         
                 DisplayProjectContent = false;
                 NotifyPropertyChanged(nameof(AddEditProject));
             }
@@ -219,9 +240,9 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void EditBill()
         {
-            if(SelectedBill != null)
+            if (SelectedBill != null)
             {
-                AddEditBill = SelectedBill.Model;
+                AddEditBill = SelectedBill;
                 DisplayBillContent = false;
                 NotifyPropertyChanged(nameof(AddEditBill));
             }
@@ -230,44 +251,35 @@ namespace COP4870_New002.MAUI.ViewModels
         //SAVE
         public void SaveProject()
         {
-            if(SelectedClient != null)
+            if (SelectedClient != null)
             {
                 AddEditProject.ClientId = SelectedClient.Id;
-                if (ProjectService.Current.Get(AddEditProject.Id) == null)
-                {                
-                    ProjectService.Current.Add(AddEditProject);  
-                }
-                else
-                {
-                    int idx = ProjectService.Current.Projects.IndexOf(AddEditProject);
-                    ProjectService.Current.Projects[idx] = AddEditProject;
-                }
+                ProjectService.Current.Add(AddEditProject);
 
-                SelectedProject = new ProjectViewModel(AddEditProject);
+                SelectedProject = AddEditProject;
                 AddEditProject = null;
                 SelectedClient = null;
                 DisplayProjectContent = true;
                 NotifyPropertyChanged(nameof(Projects));
+                NotifyPropertyChanged(nameof(MainProject));
             }
         }
 
         public void SaveBill()
         {
-            int idx = BillService.Current.Bills.IndexOf(AddEditBill);
-            BillService.Current.Bills[idx] = AddEditBill;
+            BillService.Current.Add(AddEditBill);
 
-            SelectedBill = new BillViewModel(AddEditBill);
             AddEditBill = null;
             DisplayBillContent = true;
-            NotifyPropertyChanged(nameof(Bills));
+            NotifyPropertyChanged(nameof(MainProject));
         }
 
         //DELETE
         public void DeleteProject()
         {
-            if(selectedproject != null)
+            if (selectedproject != null)
             {
-                ProjectService.Current.Delete(SelectedProject.Model.Id);
+                ProjectService.Current.Delete(MainProject.project);
                 SelectedProject = null;
                 NotifyPropertyChanged(nameof(Projects));
             }
@@ -275,11 +287,11 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void DeleteBill()
         {
-            if(selectedbill != null)
+            if (selectedbill != null)
             {
-                BillService.Current.Delete(SelectedBill.Model.Id);
+                BillService.Current.Delete(MainBill.Model.bill);
                 SelectedBill = null;
-                NotifyPropertyChanged(nameof(Bills));
+                NotifyPropertyChanged(nameof(MainProject));
             }
         }
 
@@ -288,9 +300,6 @@ namespace COP4870_New002.MAUI.ViewModels
             SelectedTime = null;
             NotifyPropertyChanged(nameof(Times));
         }
-
-
-
 
         public void Cancel()
         {

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using COP4870_New002.Library.DTO;
 using COP4870_New002.Library.Models;
+using Newtonsoft.Json;
+using PP.Library.Utilities;
 
 namespace COP4870_New002.Library.Services
 {
@@ -28,49 +31,52 @@ namespace COP4870_New002.Library.Services
         private List<Bill> bills;
         private BillService()
         {
-            bills = new List<Bill>
-            {
-                new Bill{ Id = 2, IsActive = true, ClientId = 1, ProjectId = 1, DueDate = new DateTime(2012,06,20,0,0,0)},
-                new Bill{ Id = 3, IsActive = true, ClientId = 1, ProjectId = 1, DueDate = new DateTime(2013,07,09,0,0,0)},
-                new Bill{ Id = 4, IsActive = true, ClientId = 1, ProjectId = 1, DueDate = new DateTime(2016,08,09,0,0,0)},
-                new Bill{ Id = 5, IsActive = true, ClientId = 2, ProjectId = 1, DueDate = new DateTime(2010,09,09,0,0,0)},
-                new Bill{ Id = 6, IsActive = true, ClientId = 2, ProjectId = 1, DueDate = new DateTime(2029,02,10,0,0,0)}
-            };
+            UpdateBills();
         }
 
         public List<Bill> Bills
         {
-            get { return bills; }
+            get { return bills ?? new List<Bill>(); }
         }
 
-        public Bill? Get(int id)
+        public void UpdateBills()
         {
-            return Bills.FirstOrDefault(e => e.Id == id);
+            var response = new WebRequestHandler()
+                    .Get("/Bill")
+                    .Result;
+
+            bills = JsonConvert
+                .DeserializeObject<List<Bill>>(response)
+                ?? new List<Bill>();
         }
 
-        public void Add(Bill bill)
+        public BillDTO? Get(int id)
         {
-            if (bill != null)
+            var response = new WebRequestHandler()
+                    .Get($"/Bill/{id}")
+                    .Result;
+
+            return JsonConvert.DeserializeObject
+                <BillDTO>(response) ?? new BillDTO();
+        }
+
+        public void Add(Bill? p)
+        {
+            if (p != null)
             {
-                bill.Id = bills.Last().Id + 1;
-                bills.Add(bill);
+                var response = new WebRequestHandler()
+                    .Post("/Bill/Add", p).Result;
+
+                UpdateBills();
             }
         }
 
-        public void Delete(int Id)
+        public void Delete(Bill s)
         {
-            //get bill
-            var billtoremove = Get(Id);
-            if(billtoremove != null)
-            {
-                //get times
-                var Times = new ObservableCollection<Time>(TimeService.Current.Times.Where(t => t.BillId == billtoremove.Id));
-                foreach(Time time in Times)
-                {
-                    TimeService.Current.Delete(time.Id);
-                }
-                bills.Remove(billtoremove);
-            }
+            var response = new WebRequestHandler()
+                .Delete($"/Bill/Delete/{s.Id}").Result;
+
+            UpdateBills();
         }
     }
 }
