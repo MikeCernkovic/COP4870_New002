@@ -124,20 +124,10 @@ namespace COP4870_New002.MAUI.ViewModels
 
         public void Save()
         {
-            Employee employeeInList = Employees.SingleOrDefault(s => s.Id == TempEmployee.Id);
-            //if client doesn't exist add to list
-            if (employeeInList == null)
-            {
-                EmployeeService.Current.Add(TempEmployee);
-            }
-            else
-            {
-                var idx = Employees.IndexOf(employeeInList);
-                EmployeeService.Current.Employees[idx] = TempEmployee;
-            }
+            EmployeeService.Current.Add(TempEmployee);
 
             SelectedEmployee = TempEmployee;
-            NotifyPropertyChanged("Employees");
+            NotifyPropertyChanged(nameof(Employees));
         }
 
         public void Cancel()

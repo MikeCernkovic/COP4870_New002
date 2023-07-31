@@ -83,7 +83,7 @@ namespace COP4870_New002.Library.Services
 
         public void Add(Client? c)
         {
-            if (c != null && !Clients.Contains(c))
+            if (c != null)
             {
                 var response = new WebRequestHandler()
                     .Post("/Client/Add", c).Result;
@@ -96,7 +96,7 @@ namespace COP4870_New002.Library.Services
             var response = new WebRequestHandler()
                 .Delete($"/Client/Delete/{s.Id}").Result;
 
-            Clients.Remove(s);
+            //Clients.Remove(s);
         }
     }
 }

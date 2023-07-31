@@ -7,7 +7,7 @@ namespace COP4870.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TimeController
+    public class TimeController : ControllerBase
 	{
         private readonly ILogger<TimeController> _logger;
 

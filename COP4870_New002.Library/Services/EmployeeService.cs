@@ -1,5 +1,8 @@
 ﻿using System;
+using COP4870_New002.Library.DTO;
 using COP4870_New002.Library.Models;
+using Newtonsoft.Json;
+using PP.Library.Utilities;
 
 namespace COP4870_New002.Library.Services
 {
@@ -27,19 +30,23 @@ namespace COP4870_New002.Library.Services
         private List<Employee> employees;
         private EmployeeService()
         {
-            employees = new List<Employee>
-            {
-                new Employee{Id = 1, Name = "Milan", PayRate = 0.90},
-                new Employee{Id = 2, Name = "Mike", PayRate = 0.40},
-                new Employee{Id = 3, Name = "Alex", PayRate = 0.70},
-                new Employee{Id = 4, Name = "Katie", PayRate = 0.30},
-                new Employee{Id = 5, Name = "Christina", PayRate = 0.80}
-            };
+            UpdateEmployees();
         }
 
         public List<Employee> Employees
         {
-            get { return employees; }
+            get { return employees ?? new List<Employee>(); }
+        }
+
+        public void UpdateEmployees()
+        {
+            var response = new WebRequestHandler()
+                    .Get("/Employee")
+                    .Result;
+
+            employees = JsonConvert
+                .DeserializeObject<List<Employee>>(response)
+                ?? new List<Employee>();
         }
 
         public List<Employee> SearchEmployees(string query)
@@ -51,30 +58,29 @@ namespace COP4870_New002.Library.Services
 
         public Employee? Get(int id)
         {
-            return Employees.FirstOrDefault(e => e.Id == id);
+            var response = new WebRequestHandler()
+                    .Get($"/Employee/{id}")
+                    .Result;
+
+            return JsonConvert.DeserializeObject
+                <Employee>(response) ?? new Employee();
         }
 
-        public void Add(Employee? employee)
+        public void Add(Employee? e)
         {
-            if (employee != null)
+            if (e != null)
             {
-                employee.Id = employees.Last().Id + 1;
-                employees.Add(employee);
+                var response = new WebRequestHandler()
+                    .Post("/Employee/Add", e).Result;
+                UpdateEmployees();
             }
         }
 
-        public void Delete(int id)
+        public void Delete(Employee e)
         {
-            var employeeToRemove = Get(id);
-            if (employeeToRemove != null)
-            {
-                employees.Remove(employeeToRemove);
-            }
-        }
+            var response = new WebRequestHandler()
+                .Delete($"/Employee/Delete/{e.Id}").Result;
 
-        public void Delete(Employee s)
-        {
-            Delete(s.Id);
         }
     }
 }
