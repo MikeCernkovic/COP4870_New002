@@ -95,8 +95,7 @@ namespace COP4870_New002.Library.Services
         {
             var response = new WebRequestHandler()
                 .Delete($"/Client/Delete/{s.Id}").Result;
-
-            //Clients.Remove(s);
+            UpdateClients();
         }
     }
 }
